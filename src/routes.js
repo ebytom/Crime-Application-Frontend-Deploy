@@ -9,6 +9,7 @@ import CriminalsTable from "layouts/CriminalTable/criminalsTable";
 import AddCrime from "layouts/AddCrimeForm/addCrime";
 
 // @mui icons
+//TO GET ICONS FROM MATERIALICONS
 import Icon from "@mui/material/Icon";
 
 // import  from '@mui/icons-material/ClearAllOutlined';
