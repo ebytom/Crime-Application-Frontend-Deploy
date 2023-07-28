@@ -7,6 +7,7 @@ import SignIn from "layouts/authentication/sign-in";
 import SignUp from "layouts/authentication/sign-up";
 import CriminalsTable from "layouts/CriminalTable/criminalsTable";
 import AddCrime from "layouts/AddCrimeForm/addCrime";
+import CrimeTable from "layouts/CrimeTable/CrimeTable";
 
 // @mui icons
 //TO GET ICONS FROM MATERIALICONS
@@ -26,10 +27,10 @@ const routes = [
   {
     type: "collapse",
     name: "Crimes",
-    key: "table",
+    key: "crimelist",
     icon: <Icon fontSize="medium">clear_all</Icon>,
     route: "/crime-list",
-    component: <Dashboard />,
+    component: <CrimeTable />,
   },
   {
     type: "collapse",

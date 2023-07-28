@@ -64,6 +64,11 @@ const colors = {
     focus: "#67bb6a",
   },
 
+  orange: {
+    main: "#ff9100",
+    focus: "#ff9100",
+  },
+
   warning: {
     main: "#fb8c00",
     focus: "#fc9d26",
