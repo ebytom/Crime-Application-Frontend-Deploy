@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 // @mui material components
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
@@ -14,6 +15,7 @@ import Footer from "examples/Footer";
 
 import DataTable from "examples/Tables/DataTable";
 import CriminalData from "./data/criminals";
+import { Button } from "@mui/material";
 
 function CriminalsTable() {
   const { columns, rows } = CriminalData();
@@ -37,6 +39,14 @@ function CriminalsTable() {
                 <MDTypography variant="h6" color="white">
                   Criminals List
                 </MDTypography>
+                <div style={{ float: "right", marginTop: "-30px" }}>
+                  <Button
+                    style={{ color: "black", backgroundColor: "white" }}
+                  >
+                    Add New Criminal
+                    {/* {popupshow && <CrimeDilog/>} */}
+                  </Button>
+                </div>
               </MDBox>
               <MDBox pt={3}>
                 <DataTable
