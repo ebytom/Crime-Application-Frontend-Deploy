@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 // @mui material components
-import React,{useState} from "react";
+import React, { useState,useEffect } from "react";
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
 
@@ -11,7 +11,6 @@ import MDTypography from "components/MDTypography";
 // Material Dashboard 2 React example components
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
-import DataTable from "examples/Tables/DataTable";
 import CrimeData from "./data";
 import Button from "@mui/material/Button";
 import Dialog from '@mui/material/Dialog';
@@ -31,22 +30,20 @@ import Typography from '@mui/material/Typography';
 import CloseIcon from '@mui/icons-material/Close';
 import Slide from '@mui/material/Slide';
 import CollapsibleTable from "./CollapseTable";
+// Material Dashboard 2 React Examples
+import DataTable from "examples/Tables/DataTable";
+import { Axios } from "Config/Axios/Axios";
+
 
 const Transition = React.forwardRef(function Transition(props, ref) {
-    return <Slide direction="up" ref={ref} {...props} />;
-  });
-  
-//   export function FullScreenDialog() {
-    
-// }
-
-
+  return <Slide direction="up" ref={ref} {...props} />;
+});
 
 function CrimeTable() {
   const { columns, rows } = CrimeData();
 
   const [open, setOpen] = React.useState(false);
-  
+
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -55,17 +52,20 @@ function CrimeTable() {
     setOpen(false);
   };
 
-//   const [open, setOpen] = React.useState(false);
-  
-//     const handleClickOpen = () => {
-//       setOpen(true);
-//     };
-  
-//     const handleClose = () => {
-//       setOpen(false);
-//     };
+  const [crimes, setCrimes] = useState([]);
 
-   
+  useEffect(() => {
+    Axios.get('/api/v1/app/crime/getAll')
+      .then(res => {
+        setCrimes(res.data.crimes);
+        console.log(res);
+      })
+      .catch(err => {
+        console.log(err)
+      })
+
+  }, []);
+
 
   return (
     <DashboardLayout>
@@ -94,8 +94,43 @@ function CrimeTable() {
                 </div>
               </MDBox>
               <MDBox pt={3}>
-               <CollapsibleTable/>
-                {/* <DataTable
+{/* 
+              {crimes.map((criminal) => (
+                          <li key={criminal.id} className="user-card">
+                            <div className="user-profile">
+                              <img src={criminal.profileImage} alt={criminal.name} />
+                            </div>
+                            <div className="user-details">
+                              <h3>{criminal.name}</h3>
+                              <p>Age: {criminal.age}</p>
+                              <p>Number of Crimes: {criminal.numCrimes}</p>
+                            </div>
+                          </li>
+                        ))} */}
+
+                <DataTable 
+                  table={{
+                    columns: [
+                      { Header: "Case ID", accessor: "id", width: "15%" },
+                      { Header: "Type", accessor: "type", width: "15%" },
+                      { Header: "Status", accessor: "status"  ,width: "15%" },
+                      { Header: "Date", accessor: "date", width: "15%" },
+                      // { Header: "Viewmore", accessor: "EDIT", width: "12%" },
+                      { Header: "Option", accessor: "Edit", width: "15%" },
+                    ],
+                    rows: [
+                      {
+                        id: "#1",
+                        type: "Test crime",
+                        status: "closed",
+                        age: 42,
+                        date: "4/11/2021",
+                      }
+                    ],
+                  }}
+                      />
+               {/* <CollapsibleTable/> */}
+                  {/* <DataTable
                   table={{ columns, rows }}
                   isSorted={false}
                   entriesPerPage={false}
@@ -108,32 +143,33 @@ function CrimeTable() {
         </Grid>
       </MDBox>
 
+
       <div>
-      <Dialog
-        fullScreen
-        open={open}
-        onClose={handleClose}
-        TransitionComponent={Transition}
-      >
-        <AppBar sx={{ position: 'relative' }}>
-          <Toolbar>
-            <IconButton
-              edge="start"
-              color="inherit"
-              onClick={handleClose}
-              aria-label="close"
-            >
-              <CloseIcon />
-            </IconButton>
-            {/* <Button autoFocus color="inherit" onClick={handleClose}>
+        <Dialog
+          fullScreen
+          open={open}
+          onClose={handleClose}
+          TransitionComponent={Transition}
+        >
+          <AppBar sx={{ position: 'relative' }}>
+            <Toolbar>
+              <IconButton
+                edge="start"
+                color="inherit"
+                onClick={handleClose}
+                aria-label="close"
+              >
+                <CloseIcon />
+              </IconButton>
+              {/* <Button autoFocus color="inherit" onClick={handleClose}>
               
             </Button> */}
-          </Toolbar>
-        </AppBar>
-        <br/>
-       <CrimeForm/>
-      </Dialog>
-    </div>
+            </Toolbar>
+          </AppBar>
+          <br />
+          <CrimeForm />
+        </Dialog>
+      </div>
 
       {/*✅ ADD CRIME //POPUP */}
       {/* <Dialog
@@ -152,7 +188,7 @@ function CrimeTable() {
           <Button onClick={handleClose} autoFocus>
             Agree
           </Button> */}
-        {/* </DialogActions> */}
+      {/* </DialogActions> */}
       {/* </Dialog> */}
     </DashboardLayout>
   );

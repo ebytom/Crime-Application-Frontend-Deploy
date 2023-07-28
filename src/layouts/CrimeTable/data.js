@@ -49,7 +49,7 @@ export default function CriminalData() {
       <MDTypography display="block" variant="caption" color="text" fontWeight="medium">
         {title}
       </MDTypography>
-      {/* <MDTypography variant="caption">{description}</MDTypography> */}
+      <MDTypography variant="caption">{description}</MDTypography>
     </MDBox>
   );
 
@@ -76,58 +76,55 @@ export default function CriminalData() {
   return {
 
 
-    
-    //✅ END
-    // columns: [
-    //   { Header: "Name", accessor: "aaa", width: "20%", align: "left" },
-    //   { Header: "Age", accessor: "ee", align: "left" },
-    //   { Header: "Date", accessor: "status", align: "center" },
-    //   { Header: "Status", accessor: "cc", align: "center" },
-    //   { Header: "Action", accessor: "action", align: "center" },
-    // ],
+    // ✅ END
+    columns: [
+      { Header: "Name", accessor: "name", width: "20%", align: "left" },
+      { Header: "Date", accessor: "date", align: "left" },
+      { Header: "Age", accessor: "age", align: "center" },
+      { Header: "Status", accessor: "cc", align: "center" },
+      { Header: "Action", accessor: "action", align: "center" },
+    ],
 
-    // rows: [
-    //   {
-    //     author: <Name image={team3} name="John Michael" id="#10299" />,
-    //     function: <Crime title="murder" description={des} />,
-    //     status: (
-    //       <MDBox ml={-1}>
-    //         <MDBadge badgeContent="OPEN" color="error" variant="gradient" size="sm" />
-    //       </MDBox>
-    //     ),
-    //     employed: (
-    //       <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-    //         23/04/18
-    //       </MDTypography>
-    //     ),
-    //     action: (
-    //       <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-    //         Edit
-    //       </MDTypography>
-    //     ),
-    //   },
-    //   //END OF DATA PART
-    //   {
-    //     author: <Name image={team2} name="John Michael" id="#10299" />,
-    //     function: <Crime title="murder" />,
-    //     status: (
-    //       <MDBox ml={-1}>
-    //         <MDBadge badgeContent="CLOSED" color="success" variant="gradient" size="sm" />
-    //       </MDBox>
-    //     ),
-    //     employed: (
-    //       <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-    //         23/04/18
-    //       </MDTypography>
-    //     ),
-    //     action: (
-    //       <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-    //         Edit
-    //       </MDTypography>
-        // ),
-      // },
-//     // ],
-//   };
-// }
-  }
+    rows: [
+      {
+        name: <Name image={team3} name="John Michael" id="#10299" />,
+        function: <Crime title="murder" />,
+        status: (
+          <MDBox ml={-1}>
+            <MDBadge badgeContent="OPEN" color="error" variant="gradient" size="lg" />
+          </MDBox>
+        ),
+        employed: (
+          <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
+            23/04/18
+          </MDTypography>
+        ),
+        action: (
+          <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
+            Edit
+          </MDTypography>
+        ),
+      },
+      //END OF DATA PART
+      {
+        author: <Name image={team2} name="John Michael" id="#10299" />,
+        function: <Crime title="murder" />,
+        status: (
+          <MDBox ml={-1}>
+            <MDBadge badgeContent="CLOSED" color="success" variant="gradient" size="sm" />
+          </MDBox>
+        ),
+        employed: (
+          <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
+            23/04/18
+          </MDTypography>
+        ),
+        action: (
+          <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
+            Edit
+          </MDTypography>
+        ),
+      },
+    ],
+    }
 }
