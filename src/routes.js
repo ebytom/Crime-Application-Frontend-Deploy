@@ -27,7 +27,7 @@ const routes = [
   {
     type: "collapse",
     name: "Crimes",
-    key: "crimelist",
+    key: "crimes",
     icon: <Icon fontSize="medium">clear_all</Icon>,
     route: "/crime-list",
     component: <CrimeTable />,
@@ -35,7 +35,7 @@ const routes = [
   {
     type: "collapse",
     name: "Criminals",
-    key: "tables",
+    key: "criminals",
     icon: <Icon fontSize="medium">clear_all</Icon>,
     route: "/criminal-list",
     component: <CriminalsTable />,
