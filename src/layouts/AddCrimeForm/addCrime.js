@@ -23,8 +23,8 @@ import MuiAlert from '@mui/material/Alert';
 import { Axios } from "Config/Axios/Axios";
 
 function AddCrime() {
-  //✅ BACKEND
 
+  //✅ BACKEND
   const [crimeData, setCrimeData] = useState({
     caseId: "",
     incidentDetails: "",
@@ -90,7 +90,8 @@ function AddCrime() {
       .then((res) => {
         console.log(res);
         setLoader(false)
-        Success()
+        window.location.reload();
+       
       })
       .catch(err => {
         console.log(err);
@@ -122,9 +123,9 @@ function AddCrime() {
 
 
 
-  function handleClick() {
-    // window.location.reload();
-  }
+  // function handleClick() {
+  //   window.location.reload();
+  // }
 
   return (
     // <DashboardLayout>
