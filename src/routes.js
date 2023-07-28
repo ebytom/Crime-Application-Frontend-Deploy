@@ -40,14 +40,14 @@ const routes = [
     route: "/criminal-list",
     component: <CriminalsTable />,
   },
-  {
-    type: "collapse",
-    name: "Add New Crime",
-    key: "tables",
-    icon: <Icon fontSize="medium">add</Icon>,
-    route: "/add-crime",
-    component: <AddCrime />,
-  },
+  // {
+  //   type: "collapse",
+  //   name: "Add New Crime",
+  //   key: "tables",
+  //   icon: <Icon fontSize="medium">add</Icon>,
+  //   route: "/add-crime",
+  //   component: <AddCrime />,
+  // },
   // {
   //   type: "collapse",
   //   name: "RTL",
