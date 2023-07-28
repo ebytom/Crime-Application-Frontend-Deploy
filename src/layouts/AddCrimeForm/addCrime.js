@@ -20,10 +20,9 @@ import Divider from '@mui/material/Divider';
 import Stack from '@mui/material/Stack';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
-
+import { Axios } from "Config/Axios/Axios";
 
 function AddCrime() {
-
   //✅ BACKEND
 
   const [crimeData, setCrimeData] = useState({
@@ -234,7 +233,7 @@ function AddCrime() {
             <MDInput label="Report" style={{ width: '600px', justifyContent: 'center', alignSelf: 'center' }} multiline rows={5} />
             <br />
             {/* ✅ SUBMIT BUTTON - END */}
-            <Button onClick={handleClick} variant="contained" size="medium" style={{ color: 'white', width: '600px', height: '50px', fontSize: '16px', justifyContent: 'center', alignSelf: 'center' }} >Sumbit</Button>
+            <Button onClick={submitFunction} variant="contained" size="medium" style={{ color: 'white', width: '600px', height: '50px', fontSize: '16px', justifyContent: 'center', alignSelf: 'center' }} >Sumbit</Button>
             <br />
           </Card>
         </MDBox>
