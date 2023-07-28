@@ -52,10 +52,10 @@ function Row(props) {
         <TableCell component="th" scope="row">
           {row.name}
         </TableCell>
-        <TableCell align="right">{row.calories}</TableCell>
-        <TableCell align="right">{row.fat}</TableCell>
-        <TableCell align="right">{row.carbs}</TableCell>
-        <TableCell align="right">{row.protein}</TableCell>
+        <TableCell align="left">{row.calories}</TableCell>
+        <TableCell align="left">{row.fat}</TableCell>
+        <TableCell align="left">{row.carbs}</TableCell>
+        <TableCell align="left">{row.protein}</TableCell>
       </TableRow>
       <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
@@ -115,7 +115,7 @@ Row.propTypes = {
 };
 
 const rows = [
-  createData("Frozen yoghurt", 159, 6.0, 24, 4.0, 3.99),
+  createData("Fddd", 159, 6.0, 24, 4.0, 3.99),
   createData("Ice cream sandwich", 237, 9.0, 37, 4.3, 4.99),
   createData("Eclair", 262, 16.0, 24, 6.0, 3.79),
   createData("Cupcake", 305, 3.7, 67, 4.3, 2.5),
@@ -130,11 +130,11 @@ export default function CollapsibleTable() {
           <TableRow>
             <TableCell />
             <TableCell>ID</TableCell>
-            <TableCell align="right">Type</TableCell>
-            <TableCell align="right">Location&nbsp;</TableCell>
-            <TableCell align="right">Suspect&nbsp;</TableCell>
-            <TableCell align="right">Status&nbsp;</TableCell>
-            <TableCell align="right">EDIT&nbsp;</TableCell>
+            <TableCell align="left">Type</TableCell>
+            <TableCell align="left">Location&nbsp;</TableCell>
+            <TableCell align="left">Suspect&nbsp;</TableCell>
+            <TableCell align="left">Status&nbsp;</TableCell>
+            <TableCell align="left">EDIT&nbsp;</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
