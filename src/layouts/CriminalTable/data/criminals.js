@@ -30,6 +30,7 @@ import team3 from "assets/images/team-3.jpg";
 import team4 from "assets/images/team-4.jpg";
 import "../criminaltablesidebar.css";
 import $ from 'jquery'
+import { Divider } from "@mui/material";
 
 export default function CriminalData() {
   const [criminals, setCriminals] = useState([]);
@@ -48,6 +49,10 @@ export default function CriminalData() {
   function closeNav() {
     document.getElementById("mySidenav").style.width = "0";
   }
+
+  var date = new Date("2013-03-10T02:00:00Z");
+  date.toISOString().substring(0, 10);
+
   // SIDE NAV
 
   {
@@ -76,16 +81,49 @@ export default function CriminalData() {
         id="mySidenav"
         className="sidenav"
       >
+
         <a className="closebtn" onClick={closeNav}>
           &times;
         </a>
-        <h3>Full Details</h3>
-        <p>Name: {selectKey?.name}</p>
-        <p>Gender: {selectKey?.gender}</p>
-        {/* <p>Age: {new Date().getFullYear() - new Date(setCriminals?.dob)?.getFullYear()}</p>
-      <p>Status: {setCriminals.probationStatus}</p> */}
-        {/* Add other properties as needed */}
-      </div>;
+        <center><img id="avatar" src={selectKey?.criminalPhotoFileName} /></center>
+        <h3 id="fulld">{selectKey?.name} | #{selectKey?.criminalId}</h3>
+        <Divider />
+        <div className="detailsz">
+          <p id="labz">Criminal Details</p>
+          <p id="info">Gender : {selectKey?.gender}</p>
+          <br />
+          <p id="info">Age : {new Date().getFullYear() - new Date(selectKey?.dob)?.getFullYear()}</p>
+          <br />
+          <p id="info">DOB : {selectKey?.dob.split("T")[0]}</p>
+          <br />
+          <p id="info">Address : {selectKey?.address}</p>
+          <br />
+          <Divider />
+          <p id="labz">Crime Details</p>
+          <p id="info">Arrested On : {selectKey?.arrestedOn}</p>
+          <br />
+          <p id="info">Court Info. : {selectKey?.courtInformation}</p>
+          <br />
+          <p id="info">Crime Details : {selectKey?.crimeDetails}</p>
+          <br />
+          <p id="info">Case ID : {selectKey?.criminalId}</p>
+          <br />
+          <p id="info">Court Info. : {selectKey?.courtInformation}</p>
+          <br />
+          <p id="info">Court Info. : {selectKey?.courtInformation}</p>
+          <br />
+          <p id="info">Probation Status : {selectKey?.probationStatus}</p>
+          <br />
+          <Divider />
+          <p id="labz">physicalCharacteristics</p>
+          <br />
+          <p id="info">Height : {selectKey?.height}</p>
+          <br />
+          <p id="info">Height : {selectKey?.weight}</p>
+          <br />
+        </div>
+
+      </div>
 
     </MDBox>
   );

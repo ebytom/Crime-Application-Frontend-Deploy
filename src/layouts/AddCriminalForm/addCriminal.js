@@ -162,6 +162,13 @@ function AddCriminal() {
                             }))}
                         />
                         <br />
+                        <MDInput label="Gender" size="large" style={{ width: '600px', height: '50px', justifyContent: 'center', alignSelf: 'center' }}
+                            onChange={e => setCriminalData(pre => ({
+                                ...pre,
+                                gender: e.target.value,
+                            }))}
+                        />
+                        <br/>
 
                         <MDInput type="date" size="large" style={{ width: '600px', height: '50px', justifyContent: 'center', alignSelf: 'center' }}
                             onChange={e => setCriminalData(pre => ({

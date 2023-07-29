@@ -59,3 +59,75 @@
     .sidenav {
         right: 0;
     }
+
+    #fulld{
+        color: grey;
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    #avatar{
+        border-radius: 100%;
+        height: 100px;
+        width: 100px;
+    }
+
+    #labz{
+        color: black;
+        font-size: 17px;
+        font-weight: bold;
+        margin-left: 50px;
+        padding-bottom: 20px;
+    }
+
+    #info{
+        color: grey;
+        font-size: 17px;
+   margin-left: 50px;
+        
+        
+    }
+
+    #detailsz{
+        display: flex;
+    }
+
+/* : 
+    address
+"sdfsdf"
+arrestedOn
+: 
+null
+courtInformation
+: 
+"sdfsd"
+crimeDetails
+: 
+"sdfsdf"
+criminalId
+: 
+1690622640505
+criminalPhotoFileName
+: 
+"data:image/jpeg;base64,/9j/4AAQSkZJRgABAQACWAJYAA
+dob
+: 
+null
+entryDate
+: 
+"2023-07-29T09:24:00.505Z"
+name
+: 
+"sdfsf"
+physicalCharacteristics
+: 
+{height: '', weight: ''}
+probationStatus
+: 
+""
+__v
+: 
+0
+_id
+: 
+"64c4e3a8def75b25379d341c" */
