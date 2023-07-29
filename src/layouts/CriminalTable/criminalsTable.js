@@ -1,5 +1,6 @@
 /* eslint-disable prettier/prettier */
 // @mui material components
+import React,{useState,useEffect} from "react";
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
 
@@ -16,9 +17,31 @@ import Footer from "examples/Footer";
 import DataTable from "examples/Tables/DataTable";
 import CriminalData from "./data/criminals";
 import { Button } from "@mui/material";
+import AppBar from "@mui/material/AppBar";
+import Toolbar from "@mui/material/Toolbar";
+import IconButton from "@mui/material/IconButton";
+import Dialog from "@mui/material/Dialog";
+import CloseIcon from "@mui/icons-material/Close";
+import AddCriminal from "layouts/AddCriminalForm/addCriminal";
+import Slide from "@mui/material/Slide";
+
+
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
 
 function CriminalsTable() {
   const { columns, rows } = CriminalData();
+
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   return (
     <DashboardLayout>
@@ -40,7 +63,7 @@ function CriminalsTable() {
                   Criminals List
                 </MDTypography>
                 <div style={{ float: "right", marginTop: "-30px" }}>
-                  <Button
+                  <Button onClick={handleClickOpen}
                     style={{ color: "black", backgroundColor: "white" }}
                   >
                     Add New Criminal
@@ -61,6 +84,22 @@ function CriminalsTable() {
           </Grid>
         </Grid>
       </MDBox>
+      <div>
+        <Dialog fullScreen open={open} onClose={handleClose} TransitionComponent={Transition}>
+          <AppBar sx={{ position: "relative" }}>
+            <Toolbar>
+              <IconButton edge="start" color="inherit" onClick={handleClose} aria-label="close">
+                <CloseIcon />
+              </IconButton>
+              {/* <Button autoFocus color="inherit" onClick={handleClose}>
+              
+            </Button> */}
+            </Toolbar>
+          </AppBar>
+          <br />
+          <AddCriminal />
+        </Dialog>
+      </div>
     </DashboardLayout>
   );
 }

@@ -184,13 +184,13 @@ function AddCrime() {
             <MDInput label="Crime Type" size="large" style={{ width: '600px', height: '50px', justifyContent: 'center', alignSelf: 'center' }}
               onChange={e => setCrimeData(pre => ({
                 ...pre,
-                caseId: e.target.value,
+                type: e.target.value,
               }))} />
             <br />
             <MDInput label="Location" style={{ width: '600px', height: '50px', justifyContent: 'center', alignSelf: 'center' }}
               onChange={e => setCrimeData(pre => ({
                 ...pre,
-                caseId: e.target.value,
+                location: e.target.value,
               }))} />
             <br />
             {/* <MDInput label="Status" style={{ width: '600px', height: '50px', justifyContent: 'center', alignSelf: 'center' }} />
@@ -264,25 +264,62 @@ function AddCrime() {
             <label id="labmain" style={{ color: 'black', textAlign: 'center', fontSize: '18px' }}> Witness Details : </label>
             <hr style={{ height: '10px', color: 'transparent', border: 'none', outline: 'none' }} />
 
-            <MDInput label="Name" size="large" style={{ width: '600px', height: '50px', justifyContent: 'center', alignSelf: 'center' }} />
+            <MDInput label="Name" size="large" style={{ width: '600px', height: '50px', justifyContent: 'center', alignSelf: 'center' }}
+              onChange={e => setCrimeData(pre => ({
+                ...pre,
+                witness: {
+                  name: e.target.value,
+                  contact: crimeData.witness.contact,
+                  statement: crimeData.witness.statement,
+                }
+              }))} />
             <br />
-            <MDInput label="Statement" style={{ width: '600px', justifyContent: 'center', alignSelf: 'center' }} multiline rows={5} />
+            <MDInput label="Statement" style={{ width: '600px', justifyContent: 'center', alignSelf: 'center' }} multiline rows={5} onChange={e => setCrimeData(pre => ({
+              ...pre,
+              witness: {
+                name: e.target.value,
+                contact: crimeData.witness.contact,
+                statement: crimeData.witness.statement,
+              }
+            }))} />
             <br />
-            <MDInput label="Mobile NUmber" size="large" style={{ width: '600px', height: '50px', justifyContent: 'center', alignSelf: 'center' }} />
+            <MDInput label="Mobile NUmber" size="large" style={{ width: '600px', height: '50px', justifyContent: 'center', alignSelf: 'center' }}
+              onChange={e => setCrimeData(pre => ({
+                ...pre,
+                witness: {
+                  name: e.target.value,
+                  contact: crimeData.witness.contact,
+                  statement: crimeData.witness.statement,
+                }
+              }))} />
             <br />
             <Divider />
             {/* ✅ POLICE REPORT */}
             <label id="labmain" style={{ color: 'black', textAlign: 'center', fontSize: '18px' }}> Police Report : </label>
             <hr style={{ height: '10px', color: 'transparent', border: 'none', outline: 'none' }} />
 
-            <MDInput label="Report" style={{ width: '600px', justifyContent: 'center', alignSelf: 'center' }} multiline rows={5} />
+            <MDInput label="Report" style={{ width: '600px', justifyContent: 'center', alignSelf: 'center' }} multiline rows={5} 
+            onChange={e => setCrimeData(pre => ({
+              ...pre,
+              policeReport: {
+                  details: e.target.value,
+                  filename: crimeData.policeReport.filename
+              }
+          }))}/>
             <br />
 
             {/* ✅ MEDIA REPORT */}
             <label id="labmain" style={{ color: 'black', textAlign: 'center', fontSize: '18px' }}> Media Reports : </label>
             <hr style={{ height: '10px', color: 'transparent', border: 'none', outline: 'none' }} />
 
-            <MDInput label="Report" style={{ width: '600px', justifyContent: 'center', alignSelf: 'center' }} multiline rows={5} />
+            <MDInput label="Report" style={{ width: '600px', justifyContent: 'center', alignSelf: 'center' }} multiline rows={5} 
+            onChange={e => setCrimeData(pre => ({
+              ...pre,
+              mediaReport: {
+                  details: e.target.value,
+                  filename: crimeData.mediaReport.filename
+              }
+          }))} />
             <br />
             {/* ✅ SUBMIT BUTTON - END */}
             <Button onClick={submitFunction} variant="contained" size="medium" style={{ color: 'white', width: '600px', height: '50px', fontSize: '16px', justifyContent: 'center', alignSelf: 'center' }} >Sumbit</Button>
