@@ -241,7 +241,11 @@ function AddCriminal() {
                         <label id="labmain" style={{ color: 'black', textAlign: 'center', fontSize: '18px' }}>Upload Photos : </label>
                         <hr style={{ height: '10px', color: 'transparent', border: 'none', outline: 'none' }} />
                         <div style={{ display: 'inline-flex', justifyContent: 'center' }}>
-
+                            
+                            {
+                                fileErr != "" &&
+                                <b style={{color:'red'}}>{fileErr}</b>
+                            }
                             <input id="photo" name="photo" type="file" accept="image/"  onChange={handleFileUpload}/>
                             {/* <Button variant="outlined" color="info" size="small" style={{ backgroundColor: '#4CAF50', color: 'white', width: '300px', height: '40px', fontSize: '14px', justifyContent: 'center', alignSelf: 'center' }}>Upload</Button> */}
                         </div>
