@@ -68,7 +68,7 @@ function AddCriminal() {
             .then((res) => {
                 console.log(res);
                 setLoader(false)
-                Success()
+                // Success()
             })
             .catch(err => {
                 console.log(err);
