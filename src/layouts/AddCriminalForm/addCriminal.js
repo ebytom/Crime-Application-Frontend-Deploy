@@ -24,6 +24,10 @@ import { Axios } from "Config/Axios/Axios";
 
 function AddCriminal() {
 
+    function testFun(){
+        console.log("Hello");
+    }
+
     //✅ BACKEND
     const [criminalData, setCriminalData] = useState({
         name: "",
