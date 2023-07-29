@@ -18,6 +18,7 @@ Coded by www.creative-tim.com
 
 // Material Dashboard 2 React components
 import React, { useState, useEffect } from "react";
+import { ReactDOM } from "react";
 import MDBox from "components/MDBox";
 import MDTypography from "components/MDTypography";
 import MDAvatar from "components/MDAvatar";
@@ -28,17 +29,18 @@ import team2 from "assets/images/team-2.jpg";
 import team3 from "assets/images/team-3.jpg";
 import team4 from "assets/images/team-4.jpg";
 import "../criminaltablesidebar.css";
+import $ from 'jquery'
 
 export default function CriminalData() {
-  const [selectedKey, setSelectedKey] = useState(null);
-  const [criminal, selectedCriminal] = useState(null)
   const [criminals, setCriminals] = useState([]);
+  const [selectKey, setSelectedKey] = useState(null);
+
+  console.log(selectKey)
 
   const handleShowDetails = (key) => {
-    setSelectedKey(key);
     document.getElementById("mySidenav").style.width = "400px";
+    setSelectedKey(key);
   };
-
 
   function openNav() {
     document.getElementById("mySidenav").style.width = "400px";
@@ -46,24 +48,15 @@ export default function CriminalData() {
   function closeNav() {
     document.getElementById("mySidenav").style.width = "0";
   }
-
   // SIDE NAV
-  <div id="mySidenav" className="sidenav">
-    <a className="closebtn" onClick={closeNav}>&times;</a>
-  </div>
-   {setCriminals && (
-    <div>
-      <h3>Full Details</h3>
-      <p>Name: {setCriminals.name}</p>
-      <p>Gender: {setCriminals.gender}</p>
-      <p>Age: {new Date().getFullYear() - new Date(setCriminals?.dob)?.getFullYear()}</p>
-      <p>Status: {setCriminals.probationStatus}</p>
-      {/* Add other properties as needed */}
-    </div>
-    )}
-  {/* <!-- Use any element to open the sidenav --> */ }
-  // <span onClick={openNav} style={{ cursor: 'pointer', background: 'skyblue', color: 'white', padding: ' 5px' }}>SIDENAV.</span>
-  {/* <!-- Add all page content inside this div if you want the side nav to push page content to the right (not used if you only want the sidenav to sit on top of the page --> */ }
+
+  {
+    /* <!-- Use any element to open the sidenav --> */
+  }
+  // <span onClick={openNav} >SIDENAV.</span>
+  {
+    /* <!-- Add all page content inside this div if you want the side nav to push page content to the right (not used if you only want the sidenav to sit on top of the page --> */
+  }
   // <div id="main">
 
   // </div>
@@ -77,6 +70,23 @@ export default function CriminalData() {
         </MDTypography>
         <MDTypography variant="caption">{id}</MDTypography>
       </MDBox>
+
+      {/* SIDEBAR */}
+      <div
+        id="mySidenav"
+        className="sidenav"
+      >
+        <a className="closebtn" onClick={closeNav}>
+          &times;
+        </a>
+        <h3>Full Details</h3>
+        <p>Name: {selectKey?.name}</p>
+        <p>Gender: {selectKey?.gender}</p>
+        {/* <p>Age: {new Date().getFullYear() - new Date(setCriminals?.dob)?.getFullYear()}</p>
+      <p>Status: {setCriminals.probationStatus}</p> */}
+        {/* Add other properties as needed */}
+      </div>;
+
     </MDBox>
   );
 
@@ -88,7 +98,6 @@ export default function CriminalData() {
       {/* <MDTypography variant="caption">{description}</MDTypography> */}
     </MDBox>
   );
-
 
   useEffect(() => {
     Axios.get("/api/v1/app/criminal/getAll")
@@ -129,7 +138,7 @@ export default function CriminalData() {
       ),
       action: (
         <MDTypography
-          onClick={() => handleShowDetails(criminals)}
+          onClick={() => handleShowDetails(criminal)}
           component="a"
           href="#"
           variant="caption"
@@ -142,16 +151,14 @@ export default function CriminalData() {
     };
   });
 
-  return (
-    {
-      columns: [
-        { Header: "Name", accessor: "name", width: "20%", align: "left" },
-        { Header: " Gender", accessor: "gender", align: "left" },
-        { Header: "Age", accessor: "age", align: "left" },
-        { Header: "Status", accessor: "status", align: "left" },
-        { Header: "Action", accessor: "action", align: "left" },
-      ],
-      rows: rows,
-    }
-  );
+  return {
+    columns: [
+      { Header: "Name", accessor: "name", width: "20%", align: "left" },
+      { Header: " Gender", accessor: "gender", align: "left" },
+      { Header: "Age", accessor: "age", align: "left" },
+      { Header: "Status", accessor: "status", align: "left" },
+      { Header: "Action", accessor: "action", align: "left" },
+    ],
+    rows: rows,
+  };
 }
