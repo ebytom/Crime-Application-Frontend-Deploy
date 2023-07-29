@@ -25,7 +25,7 @@ import './addphoto.css'
 
 function AddCriminal() {
 
-    function testFun(){
+    function testFun() {
         console.log("Hello");
     }
 
@@ -197,55 +197,55 @@ function AddCriminal() {
                                     }
                                 }))}
                             />
-                          
+
                         </div>
-                
-                     
+
+
                         <Divider />
-                        
-                        <MDInput label="Crime Details" style={{ width: '600px', justifyContent: 'center', alignSelf: 'center' }} multiline rows={5} 
-                        onChange={e => setCriminalData(pre => ({
-                            ...pre,
-                            crimeDetails: e.target.value,
-                        }))}
+
+                        <MDInput label="Crime Details" style={{ width: '600px', justifyContent: 'center', alignSelf: 'center' }} multiline rows={5}
+                            onChange={e => setCriminalData(pre => ({
+                                ...pre,
+                                crimeDetails: e.target.value,
+                            }))}
                         />
                         <br />
-                        <MDInput type="date"  size="large" style={{ width: '600px', height: '50px', justifyContent: 'center', alignSelf: 'center' }}
-                             onChange={e => setCriminalData(pre => ({
+                        <MDInput type="date" size="large" style={{ width: '600px', height: '50px', justifyContent: 'center', alignSelf: 'center' }}
+                            onChange={e => setCriminalData(pre => ({
                                 ...pre,
                                 arrestedOn: e.target.value,
                             }))}
-                            />
+                        />
                         <br />
                         <Divider />
                         {/* ✅ COURT INFORMATIOJ */}
                         <label id="labmain" style={{ color: 'black', textAlign: 'center', fontSize: '18px' }}> Court Information : </label>
                         <hr style={{ height: '10px', color: 'transparent', border: 'none', outline: 'none' }} />
 
-                        <MDInput label="Details" style={{ width: '600px', justifyContent: 'center', alignSelf: 'center' }} multiline rows={5} 
-                        onChange={e => setCriminalData(pre => ({
-                            ...pre,
-                            courtInformation: e.target.value,
-                        }))}
+                        <MDInput label="Details" style={{ width: '600px', justifyContent: 'center', alignSelf: 'center' }} multiline rows={5}
+                            onChange={e => setCriminalData(pre => ({
+                                ...pre,
+                                courtInformation: e.target.value,
+                            }))}
                         />
                         <br />
-                        <MDInput label="Probation Status" style={{ width: '600px', justifyContent: 'center', alignSelf: 'center' }} 
-                        onChange={e => setCriminalData(pre => ({
-                            ...pre,
-                            probationStatus: e.target.value,
-                        }))}
+                        <MDInput label="Probation Status" style={{ width: '600px', justifyContent: 'center', alignSelf: 'center' }}
+                            onChange={e => setCriminalData(pre => ({
+                                ...pre,
+                                probationStatus: e.target.value,
+                            }))}
                         />
-                        <br/>
-                         <Divider />
+                        <br />
+                        <Divider />
                         {/* ✅ PHOTOS UPLOAD */}
-            <label id="labmain" style={{ color: 'black', textAlign: 'center', fontSize: '18px' }}>Upload Photos : </label>
-            <hr style={{ height: '10px', color: 'transparent', border: 'none', outline: 'none' }} />
-            <div style={{ display: 'inline-flex', justifyContent: 'center' }}>
+                        <label id="labmain" style={{ color: 'black', textAlign: 'center', fontSize: '18px' }}>Upload Photos : </label>
+                        <hr style={{ height: '10px', color: 'transparent', border: 'none', outline: 'none' }} />
+                        <div style={{ display: 'inline-flex', justifyContent: 'center' }}>
 
-            <input id="photoUpload" type="file"/>
-              {/* <Button variant="outlined" color="info" size="small" style={{ backgroundColor: '#4CAF50', color: 'white', width: '300px', height: '40px', fontSize: '14px', justifyContent: 'center', alignSelf: 'center' }}>Upload</Button> */}
-            </div>
-            <br/>
+                            <input id="photo" name="photo" type="file" accept="image/"  onChange={handleFileUpload}/>
+                            {/* <Button variant="outlined" color="info" size="small" style={{ backgroundColor: '#4CAF50', color: 'white', width: '300px', height: '40px', fontSize: '14px', justifyContent: 'center', alignSelf: 'center' }}>Upload</Button> */}
+                        </div>
+                        <br />
                         {/* ✅ SUBMIT BUTTON - END */}
                         <Button onClick={submitFunction} variant="contained" size="medium" style={{ color: 'white', width: '600px', height: '50px', fontSize: '16px', justifyContent: 'center', alignSelf: 'center' }} >Sumbit</Button>
                         <br />

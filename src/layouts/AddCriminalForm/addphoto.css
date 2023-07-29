@@ -1,8 +1,8 @@
-#photoUpload::-webkit-file-upload-button {
+#photo::-webkit-file-upload-button {
     visibility: hidden;
   }
 
-#photoUpload{
+#photo{
     height: 40px;
     width:300px;
     font-size: 16px;
@@ -12,13 +12,13 @@
     content: 'Select Photo';
 }
 
-#photoUpload:hover{
+#photo:hover{
     cursor: pointer;
     opacity: .5;
 }
 
 
-#photoUpload::before {
+#photo::before {
     vertical-align: middle;
     padding-top: 10px;
     display: inline-block;

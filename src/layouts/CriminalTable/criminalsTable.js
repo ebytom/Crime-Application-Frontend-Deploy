@@ -24,7 +24,7 @@ import Dialog from "@mui/material/Dialog";
 import CloseIcon from "@mui/icons-material/Close";
 import AddCriminal from "layouts/AddCriminalForm/addCriminal";
 import Slide from "@mui/material/Slide";
-import './sidebar.css'
+import './criminaltablesidebar.css'
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -45,7 +45,7 @@ function CriminalsTable() {
 
 //SIDENAV FUNCTION
 function openNav() {
-  document.getElementById("mySidenav").style.width = "250px";
+  document.getElementById("mySidenav").style.width = "400px";
 }
 function closeNav() {
   document.getElementById("mySidenav").style.width = "0";
