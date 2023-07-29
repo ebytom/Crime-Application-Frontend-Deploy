@@ -21,6 +21,7 @@ import Stack from '@mui/material/Stack';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
 import { Axios } from "Config/Axios/Axios";
+import './addphoto.css'
 
 function AddCriminal() {
 
@@ -154,7 +155,7 @@ function AddCriminal() {
                         <label id="labmain" style={{ color: 'black', textAlign: 'center', fontSize: '18px' }}>Criminal Details :</label>
 
                         <MDInput label="Name" size="large" style={{ width: '600px', height: '50px', justifyContent: 'center', alignSelf: 'center' }}
-                            onChange={e => setCrimeData(pre => ({
+                            onChange={e => setCriminalData(pre => ({
                                 ...pre,
                                 name: e.target.value,
                             }))}
@@ -162,14 +163,14 @@ function AddCriminal() {
                         <br />
 
                         <MDInput type="date" size="large" style={{ width: '600px', height: '50px', justifyContent: 'center', alignSelf: 'center' }}
-                            onChange={e => setCrimeData(pre => ({
+                            onChange={e => setCriminalData(pre => ({
                                 ...pre,
                                 dob: e.target.value,
                             }))}
                         />
                         <br />
                         <MDInput label="Address" style={{ width: '600px', justifyContent: 'center', alignSelf: 'center' }}
-                            onChange={e => setCrimeData(pre => ({
+                            onChange={e => setCriminalData(pre => ({
                                 ...pre,
                                 address: e.target.value,
                             }))}
@@ -181,7 +182,7 @@ function AddCriminal() {
                                 onChange={e => setCriminalData(pre => ({
                                     ...pre,
                                     physicalCharacteristics: {
-                                        weight: e.target.value,
+                                        height: e.target.value,
                                         height: criminalData.physicalCharacteristics.height
                                     }
                                 }))}
@@ -192,120 +193,25 @@ function AddCriminal() {
                                     ...pre,
                                     physicalCharacteristics: {
                                         weight: e.target.value,
-                                        height: criminalData.physicalCharacteristics.height
+                                        weight: criminalData.physicalCharacteristics.weight
                                     }
                                 }))}
                             />
                           
                         </div>
                 
-                        {/* <MDInput label="Crime Type" size="large" style={{ width: '600px', height: '50px', justifyContent: 'center', alignSelf: 'center' }}
-                            onChange={e => setCrimeData(pre => ({
-                                ...pre,
-                                type: e.target.value,
-                            }))} />
-                        <br /> */}
-                        {/* <MDInput label="Location" style={{ width: '600px', height: '50px', justifyContent: 'center', alignSelf: 'center' }}
-                            onChange={e => setCrimeData(pre => ({
-                                ...pre,
-                                address: e.target.value,
-                            }))} />
-                        <br /> */}
-                        {/* <MDInput label="Status" style={{ width: '600px', height: '50px', justifyContent: 'center', alignSelf: 'center' }} />
-                  <br /> */}
-
-                        {/* <div style={{justifyContent:'center', display: 'inline-flex',selfAlign:'center'}}>
-                    <MDButton  variant="outlined" color="error"><Icon><PriorityHighIcon/></Icon>&nbsp;OPEN</MDButton> &nbsp;
-                    <MDButton  variant="outlined" color="warning"><Icon><LoopIcon/></Icon>&nbsp;INPROGRESS</MDButton>&nbsp;
-                    <MDButton  variant="outlined" color="success"><DoneIcon/><Icon></Icon>&nbsp;CLOSED</MDButton>&nbsp;
-                  </div> */}
-                        {/* ✅ STATUS */}
-                        {/* <InputLabel style={{ width: '600px', height: '20px', justifyContent: 'center', alignSelf: 'center' }}></InputLabel> */}
-                        {/* <Select placeholder="Select Probation status" style={{ width: '600px', height: '50px', justifyContent: 'center', alignSelf: 'center' }}
-                            onChange={e => setCrimeData(pre => ({
-                                ...pre,
-                                status: e.target.value,
-                            }))}>
-                            <MenuItem style={{ background: 'red', color: 'white' }} value={1}>Open</MenuItem>
-                            <hr style={{ height: '10px', color: 'transparent', border: 'none', outline: 'none' }} />
-                            <MenuItem style={{ background: 'orange', color: 'white' }} value={2}>Inprogress</MenuItem>
-                            <hr style={{ height: '10px', color: 'transparent', border: 'none', outline: 'none' }} />
-                            <MenuItem style={{ background: 'green', color: 'white' }} value={3}>Closed</MenuItem>
-                        </Select> */}
-                        {/* <MDInput label="Crime Details" style={{ width: '600px', height: '50px', justifyContent: 'center', alignSelf: 'center' }}
-                            onChange={e => setCrimeData(pre => ({
-                                ...pre,
-                                probationStatus: e.target.value,
-                            }))} />
-
-                        <br /> */}
+                     
                         <Divider />
-                        {/* ✅ VICTIMS DETAILS
-                        <label id="labmain" style={{ color: 'black', textAlign: 'center', fontSize: '18px' }}>Victims Information : </label>
-                        <MDInput label="Name" size="large" style={{ width: '600px', height: '50px', justifyContent: 'center', alignSelf: 'center' }}
-                            onChange={e => setCrimeData(pre => ({
-                                ...pre,
-                                victim: {
-                                    name: e.target.value,
-                                    age: crimeData.victim.age,
-                                    address: crimeData.victim.address,
-                                }
-                            }))}
-                        />
-                        <br />
-                        <MDInput label="Address" style={{ width: '600px', justifyContent: 'center', alignSelf: 'center' }} multiline rows={5} onChange={e => setCrimeData(pre => ({
-                            ...pre,
-                            victim: {
-                                name: e.target.value,
-                                age: crimeData.victim.age,
-                                address: crimeData.victim.address,
-                            }
-                        }))} />
-                        <br />
-                        <MDInput label="Age" size="large" style={{ width: '600px', height: '50px', justifyContent: 'center', alignSelf: 'center' }}
-                            onChange={e => setCrimeData(pre => ({
-                                ...pre,
-                                victim: {
-                                    name: e.target.value,
-                                    age: crimeData.victim.age,
-                                    address: crimeData.victim.address,
-                                }
-                            }))}
-                        /> */}
-                        {/* <br /> */}
-                        {/* <Divider /> */}
-                        {/* ✅ SUSPECT DETAILS
-                        <label id="labmain" style={{ color: 'black', textAlign: 'center', fontSize: '18px' }}>Suspect Information : </label>
-                        <hr style={{ height: '10px', color: 'transparent', border: 'none', outline: 'none' }} />
-                        <div style={{ display: 'inline-flex', justifyContent: 'center' }}>
-                            <Button variant="contained" size="medium" style={{ color: 'white', width: '200px', height: '50px', fontSize: '16px', justifyContent: 'center', alignSelf: 'center' }} >Select</Button>&nbsp;&nbsp;
-                            <Button variant="outlined" color="success" size="medium" style={{ backgroundColor: '#4CAF50', color: 'white', width: '200px', height: '50px', fontSize: '16px', justifyContent: 'center', alignSelf: 'center' }}>Add New</Button>
-                        </div>
-                        <br />
-                        <Divider />
-                        {/* ✅ WITHNESS DETAILS */}
-                        {/* <label id="labmain" style={{ color: 'black', textAlign: 'center', fontSize: '18px' }}> Witness Details : </label>
-                        <hr style={{ height: '10px', color: 'transparent', border: 'none', outline: 'none' }} /> */}
-{/* 
-                        <MDInput label="Name" size="large" style={{ width: '600px', height: '50px', justifyContent: 'center', alignSelf: 'center' }}
-                            onChange={e => setCrimeData(pre => ({
-                                ...pre,
-                                witness: {
-                                    name: e.target.value,
-                                    contact: crimeData.witness.contact,
-                                    statement: crimeData.witness.statement,
-                                }
-                            }))} /> */}
-                        {/* <br /> */}
+                        
                         <MDInput label="Crime Details" style={{ width: '600px', justifyContent: 'center', alignSelf: 'center' }} multiline rows={5} 
-                        onChange={e => setCrimeData(pre => ({
+                        onChange={e => setCriminalData(pre => ({
                             ...pre,
                             crimeDetails: e.target.value,
                         }))}
                         />
                         <br />
                         <MDInput type="date"  size="large" style={{ width: '600px', height: '50px', justifyContent: 'center', alignSelf: 'center' }}
-                             onChange={e => setCrimeData(pre => ({
+                             onChange={e => setCriminalData(pre => ({
                                 ...pre,
                                 arrestedOn: e.target.value,
                             }))}
@@ -317,14 +223,14 @@ function AddCriminal() {
                         <hr style={{ height: '10px', color: 'transparent', border: 'none', outline: 'none' }} />
 
                         <MDInput label="Details" style={{ width: '600px', justifyContent: 'center', alignSelf: 'center' }} multiline rows={5} 
-                        onChange={e => setCrimeData(pre => ({
+                        onChange={e => setCriminalData(pre => ({
                             ...pre,
                             courtInformation: e.target.value,
                         }))}
                         />
                         <br />
                         <MDInput label="Probation Status" style={{ width: '600px', justifyContent: 'center', alignSelf: 'center' }} 
-                        onChange={e => setCrimeData(pre => ({
+                        onChange={e => setCriminalData(pre => ({
                             ...pre,
                             probationStatus: e.target.value,
                         }))}
@@ -335,7 +241,9 @@ function AddCriminal() {
             <label id="labmain" style={{ color: 'black', textAlign: 'center', fontSize: '18px' }}>Upload Photos : </label>
             <hr style={{ height: '10px', color: 'transparent', border: 'none', outline: 'none' }} />
             <div style={{ display: 'inline-flex', justifyContent: 'center' }}>
-              <Button type="file" variant="outlined" color="info" size="small" style={{ backgroundColor: '#4CAF50', color: 'white', width: '300px', height: '40px', fontSize: '14px', justifyContent: 'center', alignSelf: 'center' }}>Upload</Button>
+
+            <input id="photoUpload" type="file"/>
+              {/* <Button variant="outlined" color="info" size="small" style={{ backgroundColor: '#4CAF50', color: 'white', width: '300px', height: '40px', fontSize: '14px', justifyContent: 'center', alignSelf: 'center' }}>Upload</Button> */}
             </div>
             <br/>
                         {/* ✅ SUBMIT BUTTON - END */}
