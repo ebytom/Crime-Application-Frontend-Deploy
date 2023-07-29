@@ -111,14 +111,11 @@ function closeNav() {
 
       <div id="mySidenav" className="sidenav">
         <a  className="closebtn" onClick={closeNav}>&times;</a>
-        {/* <!-- 		  <a href="#">ITEM 1</a>
-		  <a href="#">ITEM 2</a>
-		  <a href="#">ITEM 3</a>
-		  <a href="#">ITEM 4</a> --> */}
+       <h1>aaa</h1>
       </div>
 
       {/* <!-- Use any element to open the sidenav --> */}
-      <span onClick={openNav} style={{cursor: 'pointer', background: 'skyblue', color:'white',padding:' 5px'}}>SIDENAV.</span>
+      {/* <span onClick={openNav} style={{cursor: 'pointer', background: 'skyblue', color:'white',padding:' 5px'}}>SIDENAV.</span> */}
       {/* <!-- Add all page content inside this div if you want the side nav to push page content to the right (not used if you only want the sidenav to sit on top of the page --> */}
       <div id="main">
        

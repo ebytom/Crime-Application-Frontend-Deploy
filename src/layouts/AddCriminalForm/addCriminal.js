@@ -32,6 +32,7 @@ function AddCriminal() {
     //✅ BACKEND
     const [criminalData, setCriminalData] = useState({
         name: "",
+        gender:"",
         dob: null,
         address: "",
         physicalCharacteristics: {

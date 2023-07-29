@@ -9,7 +9,10 @@
         overflow-x: hidden; /* Disable horizontal scroll */
         padding-top: 60px; /* Place content 60px from the top */
         transition: 0.2s; /* 0.5 second transition effect to slide in the sidenav */
+        box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+
     }
+
 
     /* The navigation menu links */
     .sidenav a {
@@ -31,8 +34,14 @@
         position: absolute;
         top: 0;
         right: 25px;
-        font-size: 36px;
+        font-size: 40px;
         margin-left: 50px;
+        
+    }
+
+    .sidenav:hover .closebtn:hover{
+        color: red;
+        cursor: pointer;
     }
 
     /* Style page content - use this if you want to push the page content to the right when you open the side navigation */

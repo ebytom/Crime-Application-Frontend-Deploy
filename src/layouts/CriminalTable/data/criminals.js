@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 /* eslint-disable react/prop-types */
 /* eslint-disable react/function-component-definition */
 /**
@@ -16,17 +17,57 @@ Coded by www.creative-tim.com
 */
 
 // Material Dashboard 2 React components
+import React, { useState, useEffect } from "react";
 import MDBox from "components/MDBox";
 import MDTypography from "components/MDTypography";
 import MDAvatar from "components/MDAvatar";
 import MDBadge from "components/MDBadge";
-
+import { Axios } from "Config/Axios/Axios";
 // Images
 import team2 from "assets/images/team-2.jpg";
 import team3 from "assets/images/team-3.jpg";
 import team4 from "assets/images/team-4.jpg";
+import "../criminaltablesidebar.css";
 
 export default function CriminalData() {
+  const [selectedKey, setSelectedKey] = useState(null);
+  const [criminal, selectedCriminal] = useState(null)
+  const [criminals, setCriminals] = useState([]);
+
+  const handleShowDetails = (key) => {
+    setSelectedKey(key);
+    document.getElementById("mySidenav").style.width = "400px";
+  };
+
+
+  function openNav() {
+    document.getElementById("mySidenav").style.width = "400px";
+  }
+  function closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
+  }
+
+  // SIDE NAV
+  <div id="mySidenav" className="sidenav">
+    <a className="closebtn" onClick={closeNav}>&times;</a>
+  </div>
+   {setCriminals && (
+    <div>
+      <h3>Full Details</h3>
+      <p>Name: {setCriminals.name}</p>
+      <p>Gender: {setCriminals.gender}</p>
+      <p>Age: {new Date().getFullYear() - new Date(setCriminals?.dob)?.getFullYear()}</p>
+      <p>Status: {setCriminals.probationStatus}</p>
+      {/* Add other properties as needed */}
+    </div>
+    )}
+  {/* <!-- Use any element to open the sidenav --> */ }
+  // <span onClick={openNav} style={{ cursor: 'pointer', background: 'skyblue', color: 'white', padding: ' 5px' }}>SIDENAV.</span>
+  {/* <!-- Add all page content inside this div if you want the side nav to push page content to the right (not used if you only want the sidenav to sit on top of the page --> */ }
+  // <div id="main">
+
+  // </div>
+
   const Name = ({ image, name, id }) => (
     <MDBox display="flex" alignItems="center" lineHeight={1}>
       <MDAvatar src={image} name={name} size="sm" />
@@ -48,55 +89,69 @@ export default function CriminalData() {
     </MDBox>
   );
 
-  return {
-    columns: [
-      { Header: "Name", accessor: "aaa", width: "20%", align: "left" },
-      { Header: "Age", accessor: "ee", align: "left" },
-      { Header: "Date", accessor: "status", align: "center" },
-      { Header: "Status", accessor: "cc", align: "center" },
-      { Header: "Action", accessor: "action", align: "center" },
-    ],
 
-    rows: [
-      {
-        author: <Name image={team2} name="John Michael" id="#10299" />,
-        function: <Crime title="murder" />,
-        status: (
-          <MDBox ml={-1}>
-            <MDBadge badgeContent="OPEN" color="error" variant="gradient" size="sm" />
-          </MDBox>
-        ),
-        employed: (
-          <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-            23/04/18
-          </MDTypography>
-        ),
-        action: (
-          <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-            Edit
-          </MDTypography>
-        ),
-      },
-      //END OF DATA PART
-      {
-        author: <Name image={team2} name="John Michael" id="#10299" />,
-        function: <Crime title="murder" />,
-        status: (
-          <MDBox ml={-1}>
-            <MDBadge badgeContent="CLOSED" color="success" variant="gradient" size="sm" />
-          </MDBox>
-        ),
-        employed: (
-          <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-            23/04/18
-          </MDTypography>
-        ),
-        action: (
-          <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-            Edit
-          </MDTypography>
-        ),
-      },
-    ],
-  };
+  useEffect(() => {
+    Axios.get("/api/v1/app/criminal/getAll")
+      .then((res) => {
+        setCriminals(res.data.criminals);
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
+  const rows = criminals.map((criminal) => {
+    return {
+      name: (
+        <Name
+          image={
+            criminal?.criminalPhotoFileName
+              ? criminal.criminalPhotoFileName
+              : "https://www.svgrepo.com/download/295402/user-profile.svg"
+          }
+          name={criminal.name}
+          id={criminal.criminalId}
+        />
+      ),
+      gender: <Crime title="male" />,
+      age: (
+        <Crime title={new Date().getFullYear() - new Date(criminal?.dob)?.getFullYear()} />
+        // <MDBox ml={-1}>
+        //   <Name badgeContent={new Date().getFullYear()- new Date(criminal?.dob)?.getFullYear()}  />
+        //   {/* <MDBadge title="hello" badgeContent={new Date().getFullYear()- new Date(criminal?.dob)?.getFullYear()} color="error" variant="gradient" size="sm" /> */}
+        // </MDBox>
+      ),
+      status: (
+        <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
+          {criminal.probationStatus}
+        </MDTypography>
+      ),
+      action: (
+        <MDTypography
+          onClick={() => handleShowDetails(criminals)}
+          component="a"
+          href="#"
+          variant="caption"
+          color="text"
+          fontWeight="medium"
+        >
+          View
+        </MDTypography>
+      ),
+    };
+  });
+
+  return (
+    {
+      columns: [
+        { Header: "Name", accessor: "name", width: "20%", align: "left" },
+        { Header: " Gender", accessor: "gender", align: "left" },
+        { Header: "Age", accessor: "age", align: "left" },
+        { Header: "Status", accessor: "status", align: "left" },
+        { Header: "Action", accessor: "action", align: "left" },
+      ],
+      rows: rows,
+    }
+  );
 }
