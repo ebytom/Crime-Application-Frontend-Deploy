@@ -49,7 +49,7 @@ function AddCriminal() {
     const [fileErr, setFileErr] = useState("")
     const [loader, setLoader] = useState(false)
 
-    const Success = () => toast.success('Successfully Posted');
+    // const Success = () => toast.success('Successfully Posted');
 
     const submitFunction = async () => {
         setLoader(true)

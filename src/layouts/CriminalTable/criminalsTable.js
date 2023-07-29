@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 // @mui material components
-import React,{useState,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
 
@@ -24,7 +24,7 @@ import Dialog from "@mui/material/Dialog";
 import CloseIcon from "@mui/icons-material/Close";
 import AddCriminal from "layouts/AddCriminalForm/addCriminal";
 import Slide from "@mui/material/Slide";
-
+import './sidebar.css'
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -99,6 +99,20 @@ function CriminalsTable() {
           <br />
           <AddCriminal />
         </Dialog>
+      </div>
+      <div id="mySidenav" className="sidenav">
+        <a href="javascript:void(0)" className="closebtn" onClick="closeNav()">&times;</a>
+        {/* <!-- 		  <a href="#">ITEM 1</a>
+		  <a href="#">ITEM 2</a>
+		  <a href="#">ITEM 3</a>
+		  <a href="#">ITEM 4</a> --> */}
+      </div>
+
+      {/* <!-- Use any element to open the sidenav --> */}
+      <span onClick="openNav()" style="cursor: pointer; background: green; border: 1px solid black; padding: 5px;">Click me to get the right sidebar.</span>
+      {/* <!-- Add all page content inside this div if you want the side nav to push page content to the right (not used if you only want the sidenav to sit on top of the page --> */}
+      <div id="main">
+        ... rest of the content ...
       </div>
     </DashboardLayout>
   );
