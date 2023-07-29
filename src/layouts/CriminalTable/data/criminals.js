@@ -175,12 +175,13 @@ export default function CriminalData() {
         </MDTypography>
       ),
       action: (
-        <MDTypography
+        <MDTypography 
           onClick={() => handleShowDetails(criminal)}
           component="a"
           href="#"
-          variant="caption"
-          color="text"
+          variant="p"
+          color="white"
+          style={{backgroundColor:'#4CAF50',height:'40px',width:'100px',paddingTop:'5px',paddingBottom:'5px',paddingLeft:'10px',paddingRight:'10px',borderRadius:'20px'}}
           fontWeight="medium"
         >
           View
