@@ -1,18 +1,3 @@
-/**
-=========================================================
-* Material Dashboard 2 React - v2.2.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/material-dashboard-react
-* Copyright 2023 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
 // @mui material components
 import Grid from "@mui/material/Grid";
 
@@ -34,10 +19,25 @@ import reportsLineChartData from "layouts/dashboard/data/reportsLineChartData";
 // Dashboard components
 import Projects from "layouts/dashboard/components/Projects";
 import OrdersOverview from "layouts/dashboard/components/OrdersOverview";
+import { Axios } from "Config/Axios/Axios";
+import { useEffect, useState } from "react";
+import { CircularProgress } from "@mui/material";
 
 function Dashboard() {
   const { sales, tasks } = reportsLineChartData;
 
+  const [feeds, setFeeds] = useState(null);
+
+  useEffect(() => {
+    Axios.get("/api/v1/app/dashboard/getFeeds")
+      .then((res) => {
+        console.log(res);
+        setFeeds(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
   return (
     <DashboardLayout>
       {/* <DashboardNavbar /> */}
@@ -48,8 +48,8 @@ function Dashboard() {
               <ComplexStatisticsCard
                 color="dark"
                 icon="report_gmail_icon"
-                title="Crimes"
-                count={120}
+                title="Today's Crimes"
+                count={feeds?.todaysCrimes}
                 percentage={{
                   color: "success",
                   amount: "+55%",
@@ -62,8 +62,8 @@ function Dashboard() {
             <MDBox mb={1.5}>
               <ComplexStatisticsCard
                 icon="leaderboard"
-                title="Today's criminals"
-                count="32"
+                title="Total Crimes"
+                count={feeds?.totalCrimes}
                 percentage={{
                   color: "success",
                   amount: "+3%",
@@ -77,8 +77,8 @@ function Dashboard() {
               <ComplexStatisticsCard
                 color="error"
                 icon="priority_high"
-                title="Open Case's"
-                count="34"
+                title="Total Criminals"
+                count={feeds?.totalCriminals}
                 percentage={{
                   color: "success",
                   amount: "+1%",
@@ -92,8 +92,8 @@ function Dashboard() {
               <ComplexStatisticsCard
                 color="primary"
                 icon="person_add"
-                title="All time"
-                count="56,972"
+                title="Open Cases"
+                count={feeds?.unClosedCases}
                 percentage={{
                   color: "success",
                   amount: "83",
