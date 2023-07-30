@@ -64,6 +64,11 @@ function AddCrime() {
     var filename = ""
     var data = crimeData
 
+    data = {
+      ...data,
+      stringDate: crimeData.date?.split("T")[0].split("-").reverse().join("-")
+    }
+
     if (policeReportFile != null) {
       filename = await uploadFile(policeReportFile, "policeReport")
       data = {
@@ -85,6 +90,8 @@ function AddCrime() {
         }
       }
     }
+
+
 
     Axios.post('/api/v1/app/crime/add', data)
       .then((res) => {

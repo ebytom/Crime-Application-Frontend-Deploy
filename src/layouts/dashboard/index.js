@@ -52,8 +52,8 @@ function Dashboard() {
                 count={feeds?.todaysCrimes}
                 percentage={{
                   color: "success",
-                  amount: "+55%",
-                  label: "than lask week",
+                  amount: `${feeds?.todaysCrimesIncrease.toFixed(2)}%`,
+                  label: "than yesterday",
                 }}
               />
             </MDBox>
@@ -96,8 +96,8 @@ function Dashboard() {
                 count={feeds?.unClosedCases}
                 percentage={{
                   color: "success",
-                  amount: "83",
-                  label: "New",
+                  amount: feeds?.inProgressCases,
+                  label: "in progess cases",
                 }}
               />
             </MDBox>
