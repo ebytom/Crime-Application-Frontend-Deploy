@@ -455,7 +455,6 @@ function AddCrime() {
         <div className="bg-overlay"></div>
 
         {/*✅  ADD NEW CRIMINAL  */}
-
       </div>
       <div>
         <Dialog fullScreen open={open} onClose={handleClose} TransitionComponent={Transition}>
