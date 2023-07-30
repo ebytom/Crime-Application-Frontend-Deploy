@@ -208,11 +208,11 @@ function AddCrime() {
                 ...pre,
                 status: e.target.value,
               }))}>
-              <MenuItem style={{ background: 'red', color: 'white' }} value={1}>Open</MenuItem>
+              <MenuItem style={{ background: 'red', color: 'white' }} value="Open">Open</MenuItem>
               <hr style={{ height: '10px', color: 'transparent', border: 'none', outline: 'none' }} />
-              <MenuItem style={{ background: 'orange', color: 'white' }} value={2}>Inprogress</MenuItem>
+              <MenuItem style={{ background: 'orange', color: 'white' }} value="Inprogress">Inprogress</MenuItem>
               <hr style={{ height: '10px', color: 'transparent', border: 'none', outline: 'none' }} />
-              <MenuItem style={{ background: 'green', color: 'white' }} value={3}>Closed</MenuItem>
+              <MenuItem style={{ background: 'green', color: 'white' }} value="Closed">Closed</MenuItem>
             </Select>
 
             <br />

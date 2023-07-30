@@ -34,7 +34,7 @@ import DataTable from "examples/Tables/DataTable";
 import { Axios } from "Config/Axios/Axios";
 import CircularProgress from "@mui/material/CircularProgress";
 import './crimetable.css'
-
+import "../CriminalTable/criminaltablesidebar.css"
 
 
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -199,10 +199,47 @@ function CrimeTable() {
         <a className="closebtn" onClick={closeNav}>
           &times;
         </a>
-        <h3 id="fulld">{selectKey?.caseId} | #{selectKey?.incidentDetails}</h3>
+        <h3 id="fulld">{selectKey?.caseId} | {selectKey?.incidentDetails}</h3>
         <Divider />
         <div className="detailsz">
           <p id="labz">Crime Details</p>
+          <hr  style={{height:'8px',color:"transparent",backgroundColor:"transparent",border:"none"}}/>
+          <p id="info">Arrested On : {selectKey?.date.split("T")[0]}</p>
+          <hr  style={{height:'8px',color:"transparent",backgroundColor:"transparent",border:"none"}}/>
+          <p id="info">Location : {selectKey?.location}</p>
+          <hr  style={{height:'8px',color:"transparent",backgroundColor:"transparent",border:"none"}}/>
+          <p id="info">Status : {selectKey?.status}</p>
+          <hr  style={{height:'8px',color:"transparent",backgroundColor:"transparent",border:"none"}}/>
+          <p id="info">Incident Details : {selectKey?.incidentDetails}</p>
+          <hr  style={{height:'8px',color:"transparent",backgroundColor:"transparent",border:"none"}}/>
+          <p id="info">Gender : {selectKey?.gender}</p>
+          <hr  style={{height:'8px',color:"transparent",backgroundColor:"transparent",border:"none"}}/>
+          <p id="info">Suspect : {selectKey?.suspect}</p>
+          <hr  style={{height:'8px',color:"transparent",backgroundColor:"transparent",border:"none"}}/>
+          <p id="info">Type : {selectKey?.type}</p>
+          <hr  style={{height:'8px',color:"transparent",backgroundColor:"transparent",border:"none"}}/>
+          <Divider />
+          <p id="labz">Victim Details</p>
+          <p id="info">Name : {selectKey?.victim.name}</p>
+          <hr  style={{height:'8px',color:"transparent",backgroundColor:"transparent",border:"none"}}/>
+          <p id="info">Age : {selectKey?.victim.age}</p>
+          <hr  style={{height:'8px',color:"transparent",backgroundColor:"transparent",border:"none"}}/>
+          <p id="info">Address : {selectKey?.victim.address}</p>
+          <hr  style={{height:'8px',color:"transparent",backgroundColor:"transparent",border:"none"}}/>
+          <Divider />
+          <p id="labz">Witness Details</p>
+          <p id="info">Name : {selectKey?.witness.name}</p>
+          <hr  style={{height:'8px',color:"transparent",backgroundColor:"transparent",border:"none"}}/>
+          <p id="info">Contact : {selectKey?.witness.contact}</p>
+          <hr  style={{height:'8px',color:"transparent",backgroundColor:"transparent",border:"none"}}/>
+          <p id="info">Statement : {selectKey?.witness.statement}</p>
+          <Divider />
+          <p id="labz">Police Report</p>
+          <p id="info">Report : {selectKey?.policeReport.details}</p>
+          <Divider />
+
+          <p id="labz">Media Report</p>
+          <p id="info">Report : {selectKey?.mediaReport.details}</p>
           <br />
         </div>
       </div>

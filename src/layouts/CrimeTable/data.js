@@ -74,14 +74,12 @@ export default function CriminalData() {
   }, []);
 
   return {
-
-
     // ✅ END
     columns: [
       { Header: "Name", accessor: "name", width: "20%", align: "left" },
       { Header: "Date", accessor: "date", align: "left" },
       { Header: "Age", accessor: "age", align: "center" },
-      { Header: "Status", accessor: "cc", align: "center" },
+      { Header: "Status", accessor: "status", align: "center" },
       { Header: "Action", accessor: "action", align: "center" },
     ],
 
