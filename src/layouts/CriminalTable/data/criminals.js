@@ -110,8 +110,6 @@ export default function CriminalData() {
           <br />
           <p id="info">Court Info. : {selectKey?.courtInformation}</p>
           <br />
-          <p id="info">Court Info. : {selectKey?.courtInformation}</p>
-          <br />
           <p id="info">Probation Status : {selectKey?.probationStatus}</p>
           <br />
           <Divider />
@@ -181,7 +179,7 @@ export default function CriminalData() {
           href="#"
           variant="p"
           color="white"
-          style={{backgroundColor:'#4CAF50',height:'40px',width:'100px',paddingTop:'5px',paddingBottom:'5px',paddingLeft:'10px',paddingRight:'10px',borderRadius:'20px'}}
+          style={{backgroundColor:'#4CAF50',height:'50px',width:'100px',paddingTop:'5px',paddingBottom:'5px',paddingLeft:'10px',paddingRight:'10px',borderRadius:'20px'}}
           fontWeight="medium"
         >
           View

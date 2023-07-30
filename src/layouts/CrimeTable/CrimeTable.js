@@ -32,6 +32,10 @@ import Slide from "@mui/material/Slide";
 // Material Dashboard 2 React Examples
 import DataTable from "examples/Tables/DataTable";
 import { Axios } from "Config/Axios/Axios";
+import CircularProgress from "@mui/material/CircularProgress";
+import './crimetable.css'
+
+
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -39,6 +43,26 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 function CrimeTable() {
   // const { columns, rows } = CrimeData();
+  const [loading, setLoading] = useState(false);
+
+
+  //SIDEBAR FUNCTIONS
+  const [selectKey, setSelectedKey] = useState(null);
+  
+  console.log(selectKey)
+
+  const handleShowDetails = (key) => {
+    document.getElementById("mySidenav").style.width = "400px";
+    setSelectedKey(key);
+  };
+
+  function openNav() {
+    document.getElementById("mySidenav").style.width = "400px";
+  }
+  function closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
+  }
+
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -52,23 +76,39 @@ function CrimeTable() {
   const [crimes, setCrimes] = useState([]);
 
   useEffect(() => {
+    setLoading(true); // Start loading
     Axios.get("/api/v1/app/crime/getAll")
       .then((res) => {
         setCrimes(res.data.crimes);
         console.log(res);
+        setLoading(false); // Data loaded, set loading to false
+
       })
       .catch((err) => {
         console.log(err);
+        setLoading(false); // Data loaded, set loading to false
+
       });
   }, []);
+
 
   const rows = crimes.map((crime) => ({
     id: crime.caseId,
     type: crime.incidentDetails,
     status: crime.status,
     age: crime.victim.age,
-    date: crime.date,
+    date: crime.date.split("T")[0],
+    option: (
+      <Button className="viewmore" 
+      onClick={() => handleShowDetails(crime)}
+      style={{backgroundColor:'#4CAF50',color:'white',height:'10px',width:'80px',borderRadius:'20px'}}
+      >
+        View
+      </Button>
+    ),
   }));
+
+  
 
   return (
     <DashboardLayout>
@@ -100,6 +140,11 @@ function CrimeTable() {
                 </div>
               </MDBox>
               <MDBox pt={3}>
+              {loading ? (
+              <div style={{ display: "flex", justifyContent: "center", padding: "20px" }}>
+                <CircularProgress color="secondary" />
+              </div>
+            ):(
                 <DataTable
                   table={{
                     columns: [
@@ -108,11 +153,12 @@ function CrimeTable() {
                       { Header: "Status", accessor: "status", width: "15%" },
                       { Header: "Date", accessor: "date", width: "15%" },
                       // { Header: "Viewmore", accessor: "EDIT", width: "12%" },
-                      { Header: "Option", accessor: "Edit", width: "15%" },
+                      { Header: "Option", accessor: "option", width: "15%" },
                     ],
                     rows: rows,
                   }}
                 />
+                )}
                 {/* <CollapsibleTable/> */}
                 {/* <DataTable
                   table={{ columns, rows }}
@@ -142,27 +188,24 @@ function CrimeTable() {
           <br />
           <CrimeForm />
         </Dialog>
-      </div>
 
-      {/*✅ ADD CRIME //POPUP */}
-      {/* <Dialog
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description">
-        <DialogTitle id="alert-dialog-title"></DialogTitle>
-        <DialogContent>
-          <DialogContentText id="alert-dialog-description">
-           <CrimeForm/>
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          {/* <Button onClick={handleClose}>Disagree</Button>
-          <Button onClick={handleClose} autoFocus>
-            Agree
-          </Button> */}
-      {/* </DialogActions> */}
-      {/* </Dialog> */}
+      </div>
+      {/* SIDEBAR */}
+      <div
+        id="mySidenav"
+        className="sidenav"
+      >
+
+        <a className="closebtn" onClick={closeNav}>
+          &times;
+        </a>
+        <h3 id="fulld">{selectKey?.caseId} | #{selectKey?.incidentDetails}</h3>
+        <Divider />
+        <div className="detailsz">
+          <p id="labz">Crime Details</p>
+          <br />
+        </div>
+      </div>
     </DashboardLayout>
   );
 }

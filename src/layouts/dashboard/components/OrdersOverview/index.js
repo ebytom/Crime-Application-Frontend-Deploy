@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 /**
 =========================================================
 * Material Dashboard 2 React - v2.2.0
@@ -44,7 +45,10 @@ function OrdersOverview() {
           </MDTypography>
         </MDBox>
       </MDBox>
-      <MDBox p={2}>
+
+      
+      
+      {/* <MDBox p={2}>
         <TimelineItem
           color="success"
           icon="notifications"
@@ -76,7 +80,7 @@ function OrdersOverview() {
           dateTime="18 DEC 4:54 AM"
           lastItem
         />
-      </MDBox>
+      </MDBox> */}
     </Card>
   );
 }

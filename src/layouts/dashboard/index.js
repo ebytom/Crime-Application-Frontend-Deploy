@@ -40,7 +40,7 @@ function Dashboard() {
 
   return (
     <DashboardLayout>
-      <DashboardNavbar />
+      {/* <DashboardNavbar /> */}
       <MDBox py={3}>
         <Grid container spacing={3}>
           <Grid item xs={12} md={6} lg={3}>
@@ -75,9 +75,9 @@ function Dashboard() {
           <Grid item xs={12} md={6} lg={3}>
             <MDBox mb={1.5}>
               <ComplexStatisticsCard
-                color="success"
-                icon="check_circle"
-                title="Closed Case"
+                color="error"
+                icon="priority_high"
+                title="Open Case's"
                 count="34"
                 percentage={{
                   color: "success",
@@ -95,9 +95,9 @@ function Dashboard() {
                 title="All time"
                 count="56,972"
                 percentage={{
-                  color: "error",
-                  amount: "",
-                  label: "Just updated",
+                  color: "success",
+                  amount: "83",
+                  label: "New",
                 }}
               />
             </MDBox>
@@ -135,7 +135,7 @@ function Dashboard() {
               <MDBox mb={3}>
                 <ReportsLineChart
                   color="dark"
-                  title="Closed cases"
+                  title="Open cases"
                   description="This month"
                   date="just updated"
                   chart={tasks}
