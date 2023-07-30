@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import MDInput from "components/MDInput";
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
@@ -21,8 +21,72 @@ import Stack from '@mui/material/Stack';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
 import { Axios } from "Config/Axios/Axios";
+import './selectpopup.css';
+import $ from 'jquery';
+import DataTable from "examples/Tables/DataTable";
+import CircularProgress from "@mui/material/CircularProgress";
+import AddCriminal from "layouts/AddCriminalForm/addCriminal";
+import AppBar from "@mui/material/AppBar";
+import Toolbar from "@mui/material/Toolbar";
+import IconButton from "@mui/material/IconButton";
+import Typography from "@mui/material/Typography";
+import Dialog from "@mui/material/Dialog";
+import CloseIcon from "@mui/icons-material/Close";
+import Slide from "@mui/material/Slide";
+
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
 
 function AddCrime() {
+
+
+  //✅ SELECT CRIMINAL POPUP CONTENT
+  const [loading, setLoading] = useState(false);
+  const [crimes, setCrimes] = useState([]);
+
+  useEffect(() => {
+    setLoading(true); // Start loading
+    Axios.get("/api/v1/app/crime/getAll")
+      .then((res) => {
+        setCrimes(res.data.crimes);
+        console.log(res);
+        setLoading(false); // Data loaded, set loading to false
+
+      })
+      .catch((err) => {
+        console.log(err);
+        setLoading(false); // Data loaded, set loading to false
+
+      });
+  }, []);
+
+
+  const rows = crimes.map((crime) => ({
+    id: crime.caseId,
+    type: crime.incidentDetails,
+    status: crime.status,
+    age: crime.victim.age,
+    date: crime.date.split("T")[0],
+    option: (
+      <Button className="viewmore"
+        onClick={() => handleShowDetails(crime)}
+        style={{ backgroundColor: '#4CAF50', color: 'white', height: '10px', width: '80px', borderRadius: '20px' }}
+      >
+        Select
+      </Button>
+    ),
+  }));
+
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   //✅ BACKEND
   const [crimeData, setCrimeData] = useState({
@@ -128,11 +192,16 @@ function AddCrime() {
     return file
   }
 
+  //SELECT CRIMINAL FILE
+  $("#selectcriminal").on('click', function () {
+    $(".custom-model-main").addClass('model-open');
+  });
+  $(".close-btn, .bg-overlay").click(function () {
+    $(".custom-model-main").removeClass('model-open');
+  });
 
 
-  // function handleClick() {
-  //   window.location.reload();
-  // }
+
 
   return (
     // <DashboardLayout>
@@ -262,8 +331,8 @@ function AddCrime() {
             <label id="labmain" style={{ color: 'black', textAlign: 'center', fontSize: '18px' }}>Suspect Information : </label>
             <hr style={{ height: '10px', color: 'transparent', border: 'none', outline: 'none' }} />
             <div style={{ display: 'inline-flex', justifyContent: 'center' }}>
-              <Button variant="contained" size="medium" style={{ color: 'white', width: '200px', height: '50px', fontSize: '16px', justifyContent: 'center', alignSelf: 'center' }} >Select</Button>&nbsp;&nbsp;
-              <Button variant="outlined" color="success" size="medium" style={{ backgroundColor: '#4CAF50', color: 'white', width: '200px', height: '50px', fontSize: '16px', justifyContent: 'center', alignSelf: 'center' }}>Add New</Button>
+              <Button id="selectcriminal" variant="contained" size="medium" style={{ color: 'white', width: '200px', height: '50px', fontSize: '16px', justifyContent: 'center', alignSelf: 'center' }} >Select</Button>&nbsp;&nbsp;
+              <Button onClick={handleClickOpen} variant="outlined" color="success" size="medium" style={{ backgroundColor: '#4CAF50', color: 'white', width: '200px', height: '50px', fontSize: '16px', justifyContent: 'center', alignSelf: 'center' }}>Add New</Button>
             </div>
             <br />
             <Divider />
@@ -305,28 +374,28 @@ function AddCrime() {
             <label id="labmain" style={{ color: 'black', textAlign: 'center', fontSize: '18px' }}> Police Report : </label>
             <hr style={{ height: '10px', color: 'transparent', border: 'none', outline: 'none' }} />
 
-            <MDInput label="Report" style={{ width: '600px', justifyContent: 'center', alignSelf: 'center' }} multiline rows={5} 
-            onChange={e => setCrimeData(pre => ({
-              ...pre,
-              policeReport: {
+            <MDInput label="Report" style={{ width: '600px', justifyContent: 'center', alignSelf: 'center' }} multiline rows={5}
+              onChange={e => setCrimeData(pre => ({
+                ...pre,
+                policeReport: {
                   details: e.target.value,
                   filename: crimeData.policeReport.filename
-              }
-          }))}/>
+                }
+              }))} />
             <br />
 
             {/* ✅ MEDIA REPORT */}
             <label id="labmain" style={{ color: 'black', textAlign: 'center', fontSize: '18px' }}> Media Reports : </label>
             <hr style={{ height: '10px', color: 'transparent', border: 'none', outline: 'none' }} />
 
-            <MDInput label="Report" style={{ width: '600px', justifyContent: 'center', alignSelf: 'center' }} multiline rows={5} 
-            onChange={e => setCrimeData(pre => ({
-              ...pre,
-              mediaReport: {
+            <MDInput label="Report" style={{ width: '600px', justifyContent: 'center', alignSelf: 'center' }} multiline rows={5}
+              onChange={e => setCrimeData(pre => ({
+                ...pre,
+                mediaReport: {
                   details: e.target.value,
                   filename: crimeData.mediaReport.filename
-              }
-          }))} />
+                }
+              }))} />
             <br />
             {/* ✅ SUBMIT BUTTON - END */}
             <Button onClick={submitFunction} variant="contained" size="medium" style={{ color: 'white', width: '600px', height: '50px', fontSize: '16px', justifyContent: 'center', alignSelf: 'center' }} >Sumbit</Button>
@@ -334,6 +403,62 @@ function AddCrime() {
           </Card>
         </MDBox>
       </Card>
+      <div className="custom-model-main">
+        <div className="custom-model-inner">
+          <div className="close-btn">×</div>
+          <div className="custom-model-wrap">
+            <div className="pop-up-content-wrap">
+              <MDBox pt={3}>
+                {loading ? (
+                  <div style={{ display: "flex", justifyContent: "center", padding: "20px" }}>
+                    <CircularProgress color="secondary" />
+                  </div>
+                ) : (
+                  <DataTable
+                    table={{
+                      columns: [
+                        { Header: "Case ID", accessor: "id", width: "15%" },
+                        { Header: "Type", accessor: "type", width: "15%" },
+                        { Header: "Status", accessor: "status", width: "15%" },
+                        { Header: "Date", accessor: "date", width: "15%" },
+                        // { Header: "Viewmore", accessor: "EDIT", width: "12%" },
+                        { Header: "Option", accessor: "option", width: "15%" },
+                      ],
+                      rows: rows,
+                    }}
+                  />
+                )}
+                {/* <CollapsibleTable/> */}
+                {/* <DataTable
+                  table={{ columns, rows }}
+                  isSorted={false}
+                  entriesPerPage={false}
+                  showTotalEntries={false}
+                  noEndBorder
+                /> */}
+              </MDBox>
+            </div>
+          </div>
+        </div>
+        <div className="bg-overlay"></div>
+      </div>
+      <div>
+        <Dialog fullScreen open={open} onClose={handleClose} TransitionComponent={Transition}>
+          <AppBar sx={{ position: "relative" }}>
+            <Toolbar>
+              <IconButton edge="start" color="inherit" onClick={handleClose} aria-label="close">
+                <CloseIcon />
+              </IconButton>
+              {/* <Button autoFocus color="inherit" onClick={handleClose}>
+              
+            </Button> */}
+            </Toolbar>
+          </AppBar>
+          <br />
+          <AddCriminal />
+        </Dialog>
+
+      </div>
     </Grid>
     //     </Grid>
     //   </MDBox>

@@ -24,7 +24,6 @@ import { Axios } from "Config/Axios/Axios";
 import './addphoto.css'
 
 function AddCriminal() {
-
     function testFun() {
         console.log("Hello");
     }
