@@ -33,13 +33,16 @@ import Typography from "@mui/material/Typography";
 import Dialog from "@mui/material/Dialog";
 import CloseIcon from "@mui/icons-material/Close";
 import Slide from "@mui/material/Slide";
+// import SearchBar from "material-ui-search-bar";
+import SearchBar from '@mkyy/mui-search-bar';
+
+
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
 function AddCrime() {
-
 
   //✅ SELECT CRIMINAL POPUP CONTENT
   const [loading, setLoading] = useState(false);
@@ -117,6 +120,13 @@ function AddCrime() {
       filename: ""
     }
   })
+
+  //✅ SEARCH BAR STATES
+  const [textFieldValue, setTextFieldValue] = useState("");
+  const handleSearch = labelOptionValue => {
+    //...
+    console.log(labelOptionValue);
+  };
 
   const [loader, setLoader] = useState(false)
 
@@ -403,11 +413,21 @@ function AddCrime() {
           </Card>
         </MDBox>
       </Card>
+      {/* ✅ SELECT NEW CRIMINAL */}
       <div className="custom-model-main">
         <div className="custom-model-inner">
           <div className="close-btn">×</div>
           <div className="custom-model-wrap">
             <div className="pop-up-content-wrap">
+              {/* <SearchBar
+          // value={searched}
+          onChange={(searchVal) => requestSearch(searchVal)}
+          onCancelSearch={() => cancelSearch()}
+        /> */}<SearchBar
+                value={textFieldValue}
+                onChange={newValue => setTextFieldValue(newValue)}
+                onSearch={handleSearch}
+              />
               <MDBox pt={3}>
                 {loading ? (
                   <div style={{ display: "flex", justifyContent: "center", padding: "20px" }}>
@@ -428,19 +448,14 @@ function AddCrime() {
                     }}
                   />
                 )}
-                {/* <CollapsibleTable/> */}
-                {/* <DataTable
-                  table={{ columns, rows }}
-                  isSorted={false}
-                  entriesPerPage={false}
-                  showTotalEntries={false}
-                  noEndBorder
-                /> */}
               </MDBox>
             </div>
           </div>
         </div>
         <div className="bg-overlay"></div>
+
+        {/*✅  ADD NEW CRIMINAL  */}
+
       </div>
       <div>
         <Dialog fullScreen open={open} onClose={handleClose} TransitionComponent={Transition}>
