@@ -35,6 +35,7 @@ import { Axios } from "Config/Axios/Axios";
 import CircularProgress from "@mui/material/CircularProgress";
 import './crimetable.css'
 import "../CriminalTable/criminaltablesidebar.css"
+import SearchBar from '@mkyy/mui-search-bar';
 
 
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -44,6 +45,9 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 function CrimeTable() {
   // const { columns, rows } = CrimeData();
   const [loading, setLoading] = useState(false);
+
+  //SEARCH BAR STATES
+  const [textFieldValue, setTextFieldValue] = useState("");
 
 
   //SIDEBAR FUNCTIONS
@@ -92,7 +96,30 @@ function CrimeTable() {
   }, []);
 
 
-  const rows = crimes.map((crime) => ({
+  const handleSearch = labelOptionValue => {
+    //...
+    console.log(labelOptionValue);
+  };
+
+
+
+  // const rows = crimes.reverse().map((crime) => ({
+  //   id: crime.caseId,
+  //   type: crime.incidentDetails,
+  //   status: crime.status,
+  //   age: crime.victim.age,
+  //   date: crime.date.split("T")[0],
+  //   option: (
+  //     <Button className="viewmore" 
+  //     onClick={() => handleShowDetails(crime)}
+  //     style={{backgroundColor:'#4CAF50',color:'white',height:'10px',width:'80px',borderRadius:'20px'}}
+  //     >
+  //       View
+  //     </Button>
+  //   ),
+  // }));
+
+  const rows = crimes.reverse().filter((crime) => crime.caseId.includes(textFieldValue)).map((crime) => ({
     id: crime.caseId,
     type: crime.incidentDetails,
     status: crime.status,
@@ -107,6 +134,10 @@ function CrimeTable() {
       </Button>
     ),
   }));
+
+  //SEARCH BAR FUNCTION
+ 
+
 
   
 
@@ -128,7 +159,9 @@ function CrimeTable() {
               >
                 <MDTypography variant="h6" color="white">
                   Crime List
+                     {/* ✅ SEARCH BAR */}
                 </MDTypography>
+              
                 <div style={{ float: "right", marginTop: "-30px" }}>
                   <Button
                     onClick={handleClickOpen}
@@ -138,6 +171,15 @@ function CrimeTable() {
                     {/* {popupshow && <CrimeDilog/>} */}
                   </Button>
                 </div>
+                &nbsp; &nbsp; &nbsp;
+                <div style={{paddingLeft:'300px', float: "right", marginTop: "-30px" }}>
+              <SearchBar 
+                value={textFieldValue}
+                onChange={newValue => setTextFieldValue(newValue)}
+                onSearch={handleSearch}
+                className="searchbar"
+              />
+              </div>
               </MDBox>
               <MDBox pt={3}>
               {loading ? (

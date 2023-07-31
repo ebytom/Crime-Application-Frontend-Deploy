@@ -20,7 +20,7 @@
     "@material-ui/icons": "^4.11.3",
     "@mkyy/mui-search-bar": "^0.5.2",
     "@mui/icons-material": "5.11.16",
-    "@mui/material": "5.12.3",
+    "@mui/material": "^5.12.3",
     "axios": "^1.4.0",
     "chart.js": "4.3.0",
     "chroma-js": "2.4.2",

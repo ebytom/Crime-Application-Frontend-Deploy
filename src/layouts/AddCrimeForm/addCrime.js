@@ -35,7 +35,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import Slide from "@mui/material/Slide";
 // import SearchBar from "material-ui-search-bar";
 import SearchBar from '@mkyy/mui-search-bar';
-
+import { ImageList } from '@mui/material';
 
 
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -44,15 +44,23 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 function AddCrime() {
 
+  //✅ SEARCH BAR STATES
+  const [textFieldValue, setTextFieldValue] = useState("");
+  const handleSearch = labelOptionValue => {
+    //...
+    console.log(labelOptionValue);
+  };
+
+
   //✅ SELECT CRIMINAL POPUP CONTENT
   const [loading, setLoading] = useState(false);
-  const [crimes, setCrimes] = useState([]);
+  const [criminals, setCriminals] = useState([]);
 
   useEffect(() => {
     setLoading(true); // Start loading
-    Axios.get("/api/v1/app/crime/getAll")
+    Axios.get("/api/v1/app/criminal/getAll")
       .then((res) => {
-        setCrimes(res.data.crimes);
+        setCriminals(res.data.criminals);
         console.log(res);
         setLoading(false); // Data loaded, set loading to false
 
@@ -64,22 +72,31 @@ function AddCrime() {
       });
   }, []);
 
+  var date = new Date("2013-03-10T02:00:00Z");
+  date.toISOString().substring(0, 10);
 
-  const rows = crimes.map((crime) => ({
-    id: crime.caseId,
-    type: crime.incidentDetails,
-    status: crime.status,
-    age: crime.victim.age,
-    date: crime.date.split("T")[0],
+  const rows = criminals.filter((criminal) => criminal.name.toLowerCase().includes(textFieldValue.toLowerCase())).map((criminal) => ({
+    image: (
+      <img
+        src={criminal.criminalPhotoFileName}
+        alt="photo"
+        width="50px" // Set the width of the image
+        height="50px" // Set the height of the image
+      />
+    ),
+    name: criminal.name,
+    age: new Date().getFullYear() - new Date(criminal?.dob)?.getFullYear(),
     option: (
       <Button className="viewmore"
-        onClick={() => handleShowDetails(crime)}
-        style={{ backgroundColor: '#4CAF50', color: 'white', height: '10px', width: '80px', borderRadius: '20px' }}
+        onClick={() => handleSelectCriminal(criminal.criminalId)}
+        style={{ backgroundColor: '#4CAF50', color: 'white', height: '30px', width: '10px', borderRadius: '20px' }}
       >
         Select
       </Button>
     ),
   }));
+
+  
 
   const [open, setOpen] = React.useState(false);
 
@@ -121,13 +138,20 @@ function AddCrime() {
     }
   })
 
-  //✅ SEARCH BAR STATES
-  const [textFieldValue, setTextFieldValue] = useState("");
-  const handleSearch = labelOptionValue => {
-    //...
-    console.log(labelOptionValue);
-  };
 
+  //✅ SELECT CRIMINAL POPUP FN
+  function handleSelectCriminal(criminalId){
+    setCrimeData({
+      ...crimeData,
+      suspect: criminalId
+    })
+    $(".custom-model-main").removeClass('model-open');
+  }
+
+  console.log(crimeData);
+
+
+  
   const [loader, setLoader] = useState(false)
 
   const [policeReportFile, setPoliceReportFile] = useState(null)
@@ -423,10 +447,12 @@ function AddCrime() {
           // value={searched}
           onChange={(searchVal) => requestSearch(searchVal)}
           onCancelSearch={() => cancelSearch()}
-        /> */}<SearchBar
+        /> */}
+        <SearchBar
                 value={textFieldValue}
                 onChange={newValue => setTextFieldValue(newValue)}
                 onSearch={handleSearch}
+                className="searchbar"
               />
               <MDBox pt={3}>
                 {loading ? (
@@ -437,10 +463,10 @@ function AddCrime() {
                   <DataTable
                     table={{
                       columns: [
-                        { Header: "Case ID", accessor: "id", width: "15%" },
-                        { Header: "Type", accessor: "type", width: "15%" },
-                        { Header: "Status", accessor: "status", width: "15%" },
-                        { Header: "Date", accessor: "date", width: "15%" },
+                        { Header: "Profile", accessor: "image", width: "15%" },
+                        { Header: "Name", accessor: "name", width: "15%" },
+                        // { Header: "Status", accessor: "status", width: "15%" },
+                        { Header: "Age", accessor: "age", width: "15%" },
                         // { Header: "Viewmore", accessor: "EDIT", width: "12%" },
                         { Header: "Option", accessor: "option", width: "15%" },
                       ],
