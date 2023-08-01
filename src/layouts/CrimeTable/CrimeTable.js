@@ -166,7 +166,7 @@ function CrimeTable() {
                 </MDTypography>
 
                 <div style={{ float: "right", marginTop: "-30px" }}>
-                  <Button
+                  <Button id="add-new-crime"
                     onClick={handleClickOpen}
                     style={{ color: "black", backgroundColor: "white" }}
                   >
@@ -174,15 +174,15 @@ function CrimeTable() {
                     {/* {popupshow && <CrimeDilog/>} */}
                   </Button>
                 </div>
-                &nbsp; &nbsp; &nbsp;
-                <div style={{ paddingLeft: '300px', float: "right", marginTop: "-30px" }}>
-                  <SearchBar
-                    value={textFieldValue}
-                    onChange={newValue => setTextFieldValue(newValue)}
-                    onSearch={handleSearch}
-                    className="searchbar"
-                  />
-                </div>
+               
+                <div style={{paddingRight:'20px', float: "right", marginTop: "-30px" }}>
+              <SearchBar 
+                value={textFieldValue}
+                onChange={newValue => setTextFieldValue(newValue)}
+                onSearch={handleSearch}
+                className="searchbar"
+              />
+              </div>
               </MDBox>
               <MDBox pt={3}>
                 {loading ? (

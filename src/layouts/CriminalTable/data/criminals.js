@@ -33,10 +33,10 @@ import $ from 'jquery'
 import { Divider } from "@mui/material";
 
 export default function CriminalData() {
+
   const [criminals, setCriminals] = useState([]);
   const [selectKey, setSelectedKey] = useState(null);
 
-  console.log(selectKey)
 
   const handleShowDetails = (key) => {
     document.getElementById("mySidenav").style.width = "400px";

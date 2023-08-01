@@ -1,6 +1,5 @@
 import Dashboard from "layouts/dashboard";
 import Tables from "layouts/tables";
-import Billing from "layouts/billing";
 import Notifications from "layouts/notifications";
 import Profile from "layouts/profile";
 import SignIn from "layouts/authentication/sign-in";
@@ -8,6 +7,7 @@ import SignUp from "layouts/authentication/sign-up";
 import CriminalsTable from "layouts/CriminalTable/criminalsTable";
 import AddCrime from "layouts/AddCrimeForm/addCrime";
 import CrimeTable from "layouts/CrimeTable/CrimeTable";
+import Signin from "layouts/SignIn/signin";
 
 // @mui icons
 //TO GET ICONS FROM MATERIALICONS
@@ -81,6 +81,12 @@ const routes = [
     icon: <Icon fontSize="small">clear_all</Icon>,
     route: "/criminals",
     component: <CriminalsTable />,
+  },
+  {
+    type: "collapse",
+    key: "signin",
+    route: "/signin",
+    component: <Signin />,
   },
   // {
   //   type: "collapse",

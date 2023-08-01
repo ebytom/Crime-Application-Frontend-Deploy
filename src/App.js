@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { useState, useEffect, useMemo } from "react";
 
 // react-router components
@@ -39,8 +40,12 @@ import brandWhite from "assets/images/logo-ct.png";
 import brandDark from "assets/images/logo-ct-dark.png";
 
 // Import pages
+import Signin from "layouts/SignIn/signin";
+import Dashboard from "layouts/dashboard";
 
 export default function App() {
+
+
   const [controller, dispatch] = useMaterialUIController();
   const {
     miniSidenav,
@@ -55,6 +60,9 @@ export default function App() {
   const [onMouseEnter, setOnMouseEnter] = useState(false);
   const [rtlCache, setRtlCache] = useState(null);
   const { pathname } = useLocation();
+
+  const showSidebar = layout === "dashboard" && pathname !== "/signin";
+
 
   // Cache for the rtl
   useMemo(() => {
@@ -102,6 +110,11 @@ export default function App() {
         return getRoutes(route.collapse);
       }
 
+      //SIGNIN PAGE
+      if (route.route === "signin") {
+        return <Route exact path={route.route} element={route.element} key={route.key} />;
+      }
+
       if (route.route) {
         return <Route exact path={route.route} element={route.component} key={route.key} />;
       }
@@ -134,52 +147,98 @@ export default function App() {
   // );
 
   return direction === "rtl" ? (
+    //   <CacheProvider value={rtlCache}>
+    //     <ThemeProvider theme={darkMode ? themeDarkRTL : themeRTL}>
+    //       <CssBaseline />
+    //       {layout === "dashboard" && (
+    //         <>
+    //           <Sidenav
+    //             color={sidenavColor}
+    //             brand={(transparentSidenav && !darkMode) || whiteSidenav ? brandDark : brandWhite}
+    //             brandName="cms"
+    //             routes={routes}
+    //             onMouseEnter={handleOnMouseEnter}
+    //             onMouseLeave={handleOnMouseLeave}
+    //           />
+    //           <Configurator />
+    //           {/* {configsButton} */}
+    //         </>
+    //       )}
+    //       {layout === "vr" && <Configurator />}
+    //       <Routes>
+    //         {getRoutes(routes)}
+    //         <Route path="*" element={<Navigate to="/dashboard" />} />
+    //       </Routes>
+    //     </ThemeProvider>
+    //   </CacheProvider>
+    // ) : (
+    //   <ThemeProvider theme={darkMode ? themeDark : theme}>
+    //     <CssBaseline />
+    //     {layout === "dashboard" && (
+    //       <>
+    //         <Sidenav
+    //           color={sidenavColor}
+    //           brand={(transparentSidenav && !darkMode) || whiteSidenav ? brandDark : brandWhite}
+    //           brandName="Material Dashboard 2"
+    //           routes={routes}
+    //           onMouseEnter={handleOnMouseEnter}
+    //           onMouseLeave={handleOnMouseLeave}
+    //         />
+    //         <Configurator />
+    //         {/* {configsButton} */}
+    //       </>
+    //     )}
+    //     {layout === "vr" && <Configurator />}
+    //     <Routes>
+    //       {getRoutes(routes)}
+    //       <Route path="*" element={<Navigate to="/dashboard" />} />
+    //     </Routes>
+    //   </ThemeProvider>
+
+    //✅ NEW 
     <CacheProvider value={rtlCache}>
-      <ThemeProvider theme={darkMode ? themeDarkRTL : themeRTL}>
-        <CssBaseline />
-        {layout === "dashboard" && (
-          <>
-            <Sidenav
-              color={sidenavColor}
-              brand={(transparentSidenav && !darkMode) || whiteSidenav ? brandDark : brandWhite}
-              brandName="cms"
-              routes={routes}
-              onMouseEnter={handleOnMouseEnter}
-              onMouseLeave={handleOnMouseLeave}
-            />
-            <Configurator />
-            {/* {configsButton} */}
-          </>
-        )}
-        {layout === "vr" && <Configurator />}
-        <Routes>
-          {getRoutes(routes)}
-          <Route path="*" element={<Navigate to="/dashboard" />} />
-        </Routes>
-      </ThemeProvider>
-    </CacheProvider>
-  ) : (
-    <ThemeProvider theme={darkMode ? themeDark : theme}>
+    <ThemeProvider theme={darkMode ? themeDarkRTL : themeRTL}>
       <CssBaseline />
-      {layout === "dashboard" && (
-        <>
-          <Sidenav
-            color={sidenavColor}
-            brand={(transparentSidenav && !darkMode) || whiteSidenav ? brandDark : brandWhite}
-            brandName="Material Dashboard 2"
-            routes={routes}
-            onMouseEnter={handleOnMouseEnter}
-            onMouseLeave={handleOnMouseLeave}
-          />
-          <Configurator />
-          {/* {configsButton} */}
-        </>
+      {/* Conditionally render the Sidebar based on the showSidebar variable */}
+      {showSidebar && (
+        <Sidenav
+          color={sidenavColor}
+          brand={(transparentSidenav && !darkMode) || whiteSidenav ? brandDark : brandWhite}
+          brandName="cms"
+          routes={routes}
+          onMouseEnter={handleOnMouseEnter}
+          onMouseLeave={handleOnMouseLeave}
+        />
       )}
-      {layout === "vr" && <Configurator />}
+      {/* Conditionally render the content */}
+      <Configurator />
       <Routes>
         {getRoutes(routes)}
-        <Route path="*" element={<Navigate to="/dashboard" />} />
+        <Route path="/signin" element={<Signin />} />
       </Routes>
     </ThemeProvider>
+  </CacheProvider>
+) : (
+  <ThemeProvider theme={darkMode ? themeDark : theme}>
+    <CssBaseline />
+    {/* Conditionally render the Sidebar based on the showSidebar variable */}
+    {showSidebar && (
+      <Sidenav
+        color={sidenavColor}
+        brand={(transparentSidenav && !darkMode) || whiteSidenav ? brandDark : brandWhite}
+        brandName="Material Dashboard 2"
+        routes={routes}
+        onMouseEnter={handleOnMouseEnter}
+        onMouseLeave={handleOnMouseLeave}
+      />
+    )}
+    {/* Conditionally render the content */}
+    <Configurator />
+    <Routes>
+      {getRoutes(routes)}
+      <Route path="/signin" element={<Signin />} />
+      <Route path="/*" element={<Dashboard />} />
+    </Routes>
+  </ThemeProvider>
   );
 }
