@@ -376,7 +376,7 @@ function AddCrime() {
             <center><div className="suspect_profile">
              <img height="auto" width="100px" id="suspect_img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZKTSTsxuO1oniA3yHQJsphf_01yYw6fs04Kwzzr2Sx50-8chw6wwuSNT4tns8RRb8eNY&usqp=CAU" />
              <p id="suspect_name"> SUSPECT NAME</p>
-             <p id="suspect_id"> #123883</p>
+             <p id="suspect_id"></p>
             </div>
             </center>
 
