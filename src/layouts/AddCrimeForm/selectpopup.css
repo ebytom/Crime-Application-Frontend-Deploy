@@ -133,7 +133,7 @@
   .suspect_profile{
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
     border-radius: 10px;
-    width: 300px;
+    width: 400px;
     justify-content: center;
     height: 105px;
   }
@@ -150,12 +150,19 @@
   #suspect_name{
     vertical-align: middle;
     padding-top: 20px;
-    font-size: 18px;
+    font-size: 17px;
+    font-weight: bold;
+    width: auto;
+    float: left;
+    margin-left: 20px;
   }
 
   #suspect_id{
     vertical-align: middle;
-   
-    font-size: 18px;
+    margin-top: 50px;
+    width: 100px;
+    float: left;
+    margin-left: -137px;
+    font-size: 14px;
     color: grey;
   }
