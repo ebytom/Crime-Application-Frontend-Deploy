@@ -52,6 +52,7 @@ function AddCrime() {
 
   const [selectedSuspect, setSelectedSuspect] = useState(null);
 
+
   //✅ SEARCH BAR STATES
   const [textFieldValue, setTextFieldValue] = useState("");
   const handleSearch = labelOptionValue => {
@@ -96,7 +97,7 @@ function AddCrime() {
     age: new Date().getFullYear() - new Date(criminal?.dob)?.getFullYear(),
     option: (
       <Button className="viewmore"
-        onClick={() => handleSelectCriminal(criminal.criminalId)}
+        onClick={() => handleSelectCriminal(criminal)}
         style={{ backgroundColor: '#4CAF50', color: 'white', height: '30px', width: '10px', borderRadius: '20px' }}
       >
         Select
@@ -147,12 +148,15 @@ function AddCrime() {
 
 
   //✅ SELECT CRIMINAL POPUP FN
-  function handleSelectCriminal(criminalId) {
+  function handleSelectCriminal(criminal) {
+    //TO DISPLAY SUSPECT PROFILE AFTER SELECTING FROM THE LIST
+    setSelectedSuspect(criminal);
     setCrimeData({
       ...crimeData,
-      suspect: criminalId
+      suspect: criminal.criminalId
     })
     $(".custom-model-main").removeClass('model-open');
+
   }
 
   console.log(crimeData);
@@ -388,7 +392,7 @@ function AddCrime() {
             </div>
             </center> */}
 
-            {selectedSuspect && (  // Conditionally render the suspect_profile if a suspect is selected
+            {selectedSuspect && (
               <center>
                 <div className="suspect_profile">
                   <img
@@ -398,8 +402,8 @@ function AddCrime() {
                     src={selectedSuspect.criminalPhotoFileName}
                     alt="Suspect"
                   />
-                  <p id="suspect_name"> {selectedSuspect.name}</p>
-                  <p id="suspect_id">SUSPECT ID</p>
+                  <p id="suspect_name">{selectedSuspect.name}</p><br/>
+                  <p id="suspect_id">#{selectedSuspect.criminalId}</p>
                 </div>
               </center>
             )}

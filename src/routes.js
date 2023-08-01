@@ -83,7 +83,7 @@ const routes = [
     component: <CriminalsTable />,
   },
   {
-    type: "collapse",
+    type: "",
     key: "signin",
     route: "/signin",
     component: <Signin />,

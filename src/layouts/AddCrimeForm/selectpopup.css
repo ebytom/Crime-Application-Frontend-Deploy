@@ -138,31 +138,70 @@
     height: 105px;
   }
 
-  #suspect_img{
-    margin-bottom: 20px;
-    margin-top: 10px;
-    float: left;
-   width: 90px;
-   margin-left: 20px;
-   border-radius: 50%;
-  }
 
-  #suspect_name{
-    vertical-align: middle;
-    padding-top: 20px;
-    font-size: 17px;
-    font-weight: bold;
-    width: auto;
-    float: left;
-    margin-left: 20px;
-  }
+  /* SUSPECT PROFILE CARD */
+/* Common styles for the card */
+.suspect_profile {
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 400px;
+  margin: 10px auto;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+}
 
-  #suspect_id{
-    vertical-align: middle;
-    margin-top: 50px;
-    width: 100px;
-    float: left;
-    margin-left: -137px;
-    font-size: 14px;
-    color: grey;
+#suspect_img {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  margin-right: 20px; /* Add margin to separate the image from text */
+}
+
+#suspect_info {
+  display:  block;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+#suspect_name {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 5px; /* Add margin between Name and Case ID */
+}
+
+#suspect_id {
+  font-size: 14px;
+  color: grey;
+}
+
+/* Media queries for responsiveness */
+
+/* Small screens */
+@media screen and (max-width: 600px) {
+  .suspect_profile {
+    max-width: 300px;
   }
+}
+
+/* Medium screens */
+@media screen and (min-width: 601px) and (max-width: 900px) {
+  .suspect_profile {
+    max-width: 400px;
+  }
+}
+
+/* Large screens */
+@media screen and (min-width: 901px) and (max-width: 1200px) {
+  .suspect_profile {
+    max-width: 500px;
+  }
+}
+
+/* Extra large screens */
+@media screen and (min-width: 1201px) {
+  .suspect_profile {
+    max-width: 600px;
+  }
+}
