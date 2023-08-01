@@ -52,7 +52,7 @@ function CrimeTable() {
 
   //SIDEBAR FUNCTIONS
   const [selectKey, setSelectedKey] = useState(null);
-  
+
   console.log(selectKey)
 
   const handleShowDetails = (key) => {
@@ -119,16 +119,19 @@ function CrimeTable() {
   //   ),
   // }));
 
-  const rows = crimes.reverse().filter((crime) => crime.caseId.includes(textFieldValue)).map((crime) => ({
+  const rows = crimes.reverse().filter((crime) => {
+    const crimeIdAsString = crime?.caseId?.toString(); // Convert crimeId to a string
+    return crimeIdAsString.includes(textFieldValue);
+  }).map((crime) => ({
     id: crime.caseId,
     type: crime.incidentDetails,
     status: crime.status,
     age: crime.victim.age,
-    date: crime.date.split("T")[0],
+    date: crime?.date?.split("T")[0],
     option: (
-      <Button className="viewmore" 
-      onClick={() => handleShowDetails(crime)}
-      style={{backgroundColor:'#4CAF50',color:'white',height:'10px',width:'80px',borderRadius:'20px'}}
+      <Button className="viewmore"
+        onClick={() => handleShowDetails(crime)}
+        style={{ backgroundColor: '#4CAF50', color: 'white', height: '10px', width: '80px', borderRadius: '20px' }}
       >
         View
       </Button>
@@ -136,10 +139,10 @@ function CrimeTable() {
   }));
 
   //SEARCH BAR FUNCTION
- 
 
 
-  
+
+
 
   return (
     <DashboardLayout>
@@ -159,9 +162,9 @@ function CrimeTable() {
               >
                 <MDTypography variant="h6" color="white">
                   Crime List
-                     {/* ✅ SEARCH BAR */}
+                  {/* ✅ SEARCH BAR */}
                 </MDTypography>
-              
+
                 <div style={{ float: "right", marginTop: "-30px" }}>
                   <Button
                     onClick={handleClickOpen}
@@ -172,34 +175,34 @@ function CrimeTable() {
                   </Button>
                 </div>
                 &nbsp; &nbsp; &nbsp;
-                <div style={{paddingLeft:'300px', float: "right", marginTop: "-30px" }}>
-              <SearchBar 
-                value={textFieldValue}
-                onChange={newValue => setTextFieldValue(newValue)}
-                onSearch={handleSearch}
-                className="searchbar"
-              />
-              </div>
+                <div style={{ paddingLeft: '300px', float: "right", marginTop: "-30px" }}>
+                  <SearchBar
+                    value={textFieldValue}
+                    onChange={newValue => setTextFieldValue(newValue)}
+                    onSearch={handleSearch}
+                    className="searchbar"
+                  />
+                </div>
               </MDBox>
               <MDBox pt={3}>
-              {loading ? (
-              <div style={{ display: "flex", justifyContent: "center", padding: "20px" }}>
-                <CircularProgress color="secondary" />
-              </div>
-            ):(
-                <DataTable
-                  table={{
-                    columns: [
-                      { Header: "Case ID", accessor: "id", width: "15%" },
-                      { Header: "Type", accessor: "type", width: "15%" },
-                      { Header: "Status", accessor: "status", width: "15%" },
-                      { Header: "Date", accessor: "date", width: "15%" },
-                      // { Header: "Viewmore", accessor: "EDIT", width: "12%" },
-                      { Header: "Option", accessor: "option", width: "15%" },
-                    ],
-                    rows: rows,
-                  }}
-                />
+                {loading ? (
+                  <div style={{ display: "flex", justifyContent: "center", padding: "20px" }}>
+                    <CircularProgress color="secondary" />
+                  </div>
+                ) : (
+                  <DataTable
+                    table={{
+                      columns: [
+                        { Header: "Case ID", accessor: "id", width: "15%" },
+                        { Header: "Type", accessor: "type", width: "15%" },
+                        { Header: "Status", accessor: "status", width: "15%" },
+                        { Header: "Date", accessor: "date", width: "15%" },
+                        // { Header: "Viewmore", accessor: "EDIT", width: "12%" },
+                        { Header: "Option", accessor: "option", width: "15%" },
+                      ],
+                      rows: rows,
+                    }}
+                  />
                 )}
                 {/* <CollapsibleTable/> */}
                 {/* <DataTable
@@ -245,35 +248,35 @@ function CrimeTable() {
         <Divider />
         <div className="detailsz">
           <p id="labz">Crime Details</p>
-          <hr  style={{height:'8px',color:"transparent",backgroundColor:"transparent",border:"none"}}/>
+          <hr style={{ height: '8px', color: "transparent", backgroundColor: "transparent", border: "none" }} />
           <p id="info">Arrested On : {selectKey?.date.split("T")[0]}</p>
-          <hr  style={{height:'8px',color:"transparent",backgroundColor:"transparent",border:"none"}}/>
+          <hr style={{ height: '8px', color: "transparent", backgroundColor: "transparent", border: "none" }} />
           <p id="info">Location : {selectKey?.location}</p>
-          <hr  style={{height:'8px',color:"transparent",backgroundColor:"transparent",border:"none"}}/>
+          <hr style={{ height: '8px', color: "transparent", backgroundColor: "transparent", border: "none" }} />
           <p id="info">Status : {selectKey?.status}</p>
-          <hr  style={{height:'8px',color:"transparent",backgroundColor:"transparent",border:"none"}}/>
+          <hr style={{ height: '8px', color: "transparent", backgroundColor: "transparent", border: "none" }} />
           <p id="info">Incident Details : {selectKey?.incidentDetails}</p>
-          <hr  style={{height:'8px',color:"transparent",backgroundColor:"transparent",border:"none"}}/>
+          <hr style={{ height: '8px', color: "transparent", backgroundColor: "transparent", border: "none" }} />
           <p id="info">Gender : {selectKey?.gender}</p>
-          <hr  style={{height:'8px',color:"transparent",backgroundColor:"transparent",border:"none"}}/>
+          <hr style={{ height: '8px', color: "transparent", backgroundColor: "transparent", border: "none" }} />
           <p id="info">Suspect : {selectKey?.suspect}</p>
-          <hr  style={{height:'8px',color:"transparent",backgroundColor:"transparent",border:"none"}}/>
+          <hr style={{ height: '8px', color: "transparent", backgroundColor: "transparent", border: "none" }} />
           <p id="info">Type : {selectKey?.type}</p>
-          <hr  style={{height:'8px',color:"transparent",backgroundColor:"transparent",border:"none"}}/>
+          <hr style={{ height: '8px', color: "transparent", backgroundColor: "transparent", border: "none" }} />
           <Divider />
           <p id="labz">Victim Details</p>
           <p id="info">Name : {selectKey?.victim.name}</p>
-          <hr  style={{height:'8px',color:"transparent",backgroundColor:"transparent",border:"none"}}/>
+          <hr style={{ height: '8px', color: "transparent", backgroundColor: "transparent", border: "none" }} />
           <p id="info">Age : {selectKey?.victim.age}</p>
-          <hr  style={{height:'8px',color:"transparent",backgroundColor:"transparent",border:"none"}}/>
+          <hr style={{ height: '8px', color: "transparent", backgroundColor: "transparent", border: "none" }} />
           <p id="info">Address : {selectKey?.victim.address}</p>
-          <hr  style={{height:'8px',color:"transparent",backgroundColor:"transparent",border:"none"}}/>
+          <hr style={{ height: '8px', color: "transparent", backgroundColor: "transparent", border: "none" }} />
           <Divider />
           <p id="labz">Witness Details</p>
           <p id="info">Name : {selectKey?.witness.name}</p>
-          <hr  style={{height:'8px',color:"transparent",backgroundColor:"transparent",border:"none"}}/>
+          <hr style={{ height: '8px', color: "transparent", backgroundColor: "transparent", border: "none" }} />
           <p id="info">Contact : {selectKey?.witness.contact}</p>
-          <hr  style={{height:'8px',color:"transparent",backgroundColor:"transparent",border:"none"}}/>
+          <hr style={{ height: '8px', color: "transparent", backgroundColor: "transparent", border: "none" }} />
           <p id="info">Statement : {selectKey?.witness.statement}</p>
           <Divider />
           <p id="labz">Police Report</p>

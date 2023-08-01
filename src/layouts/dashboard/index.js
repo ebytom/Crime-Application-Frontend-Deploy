@@ -52,7 +52,7 @@ function Dashboard() {
                 count={feeds?.todaysCrimes}
                 percentage={{
                   color: "success",
-                  amount: `${feeds?.todaysCrimesIncrease.toFixed(2)}%`,
+                  amount: `${feeds?.todaysCrimesIncrease?.toFixed(2)}%`,
                   label: "than yesterday",
                 }}
               />
@@ -66,8 +66,8 @@ function Dashboard() {
                 count={feeds?.totalCrimes}
                 percentage={{
                   color: "success",
-                  amount: "+3%",
-                  label: "than last month",
+                  amount: `${feeds?.crimesThisMonth}`,
+                  label: "cimes this month",
                 }}
               />
             </MDBox>
@@ -81,8 +81,8 @@ function Dashboard() {
                 count={feeds?.totalCriminals}
                 percentage={{
                   color: "success",
-                  amount: "+1%",
-                  label: "than yesterday",
+                  amount: `${feeds?.criminalsThisMonth}`,
+                  label: "criminals this month",
                 }}
               />
             </MDBox>

@@ -164,7 +164,8 @@ function AddCrime() {
 
     data = {
       ...data,
-      stringDate: crimeData.date?.split("T")[0].split("-").reverse().join("-")
+      stringDate: crimeData.date?.split("T")[0].split("-").reverse().join("-"),
+      caseId: new Date().getTime()
     }
 
     if (policeReportFile != null) {
@@ -264,13 +265,13 @@ function AddCrime() {
             {/* ✅ CASE DETAILS */}
             <label id="labmain" style={{ color: 'black', textAlign: 'center', fontSize: '18px' }}>Case Details :</label>
 
-            <MDInput label="ID" size="large" style={{ width: '600px', height: '50px', justifyContent: 'center', alignSelf: 'center' }}
+            {/* <MDInput label="ID" size="large" style={{ width: '600px', height: '50px', justifyContent: 'center', alignSelf: 'center' }}
               onChange={e => setCrimeData(pre => ({
                 ...pre,
                 caseId: e.target.value,
               }))}
             />
-            <br />
+            <br /> */}
             <MDInput label="Incident Details" style={{ width: '600px', justifyContent: 'center', alignSelf: 'center' }} multiline rows={5}
               onChange={e => setCrimeData(pre => ({
                 ...pre,
