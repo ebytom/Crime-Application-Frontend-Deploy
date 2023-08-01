@@ -25,13 +25,22 @@ import CloseIcon from "@mui/icons-material/Close";
 import AddCriminal from "layouts/AddCriminalForm/addCriminal";
 import Slide from "@mui/material/Slide";
 import './criminaltablesidebar.css'
+import SearchBar from '@mkyy/mui-search-bar';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
+
+
 function CriminalsTable() {
   const { columns, rows } = CriminalData();
+  //SEARCH BAR STATES
+const [textFieldValue, setTextFieldValue] = useState("");
+
+function handleSearch(){
+  console.log("test");
+}
 
   const [open, setOpen] = React.useState(false);
 
@@ -78,6 +87,15 @@ function closeNav() {
                     {/* {popupshow && <CrimeDilog/>} */}
                   </Button>
                 </div>
+
+                <div style={{paddingRight:'20px', float: "right", marginTop: "-30px" }}>
+              <SearchBar 
+                value={textFieldValue}
+                onChange={newValue => setTextFieldValue(newValue)}
+                onSearch={handleSearch}
+                className="searchbar"
+              />
+              </div>
               </MDBox>
               <MDBox pt={3}>
                 <DataTable
@@ -99,23 +117,12 @@ function closeNav() {
               <IconButton edge="start" color="inherit" onClick={handleClose} aria-label="close">
                 <CloseIcon />
               </IconButton>
-              {/* <Button autoFocus color="inherit" onClick={handleClose}>
-              
-            </Button> */}
             </Toolbar>
           </AppBar>
           <br />
           <AddCriminal />
         </Dialog>
       </div>
-
-      {/* <div id="mySidenav" className="sidenav">
-        <a  className="closebtn" onClick={closeNav}>&times;</a>
-        <h2>aaaaaa</h2>
-      </div> */}
-      {/* <!-- Use any element to open the sidenav --> */}
-      {/* <span onClick={openNav} style={{cursor: 'pointer', background: 'skyblue', color:'white',padding:' 5px'}}>SIDENAV.</span> */}
-      {/* <!-- Add all page content inside this div if you want the side nav to push page content to the right (not used if you only want the sidenav to sit on top of the page --> */}
     </DashboardLayout>
   );
 }

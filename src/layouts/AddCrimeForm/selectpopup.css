@@ -129,3 +129,33 @@
     border:1px solid rgb(206, 205, 205);
     margin-left: 22px;
   }
+
+  .suspect_profile{
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    border-radius: 10px;
+    width: 300px;
+    justify-content: center;
+    height: 105px;
+  }
+
+  #suspect_img{
+    margin-bottom: 20px;
+    margin-top: 10px;
+    float: left;
+   width: 90px;
+   margin-left: 20px;
+   border-radius: 50%;
+  }
+
+  #suspect_name{
+    vertical-align: middle;
+    padding-top: 20px;
+    font-size: 18px;
+  }
+
+  #suspect_id{
+    vertical-align: middle;
+   
+    font-size: 18px;
+    color: grey;
+  }

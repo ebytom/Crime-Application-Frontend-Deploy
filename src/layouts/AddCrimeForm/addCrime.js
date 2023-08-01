@@ -36,13 +36,19 @@ import Slide from "@mui/material/Slide";
 // import SearchBar from "material-ui-search-bar";
 import SearchBar from '@mkyy/mui-search-bar';
 import { ImageList } from '@mui/material';
-
+import { useTheme } from '@mui/material/styles';
+import Box from '@mui/material/Box';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
 function AddCrime() {
+
+  //✅ SUSPECT IMAGE SET
+  const [suspectImg,setSuspectImg ] = useState("");
 
   //✅ SEARCH BAR STATES
   const [textFieldValue, setTextFieldValue] = useState("");
@@ -96,7 +102,6 @@ function AddCrime() {
     ),
   }));
 
-  
 
   const [open, setOpen] = React.useState(false);
 
@@ -140,7 +145,7 @@ function AddCrime() {
 
 
   //✅ SELECT CRIMINAL POPUP FN
-  function handleSelectCriminal(criminalId){
+  function handleSelectCriminal(criminalId) {
     setCrimeData({
       ...crimeData,
       suspect: criminalId
@@ -151,7 +156,7 @@ function AddCrime() {
   console.log(crimeData);
 
 
-  
+
   const [loader, setLoader] = useState(false)
 
   const [policeReportFile, setPoliceReportFile] = useState(null)
@@ -188,8 +193,6 @@ function AddCrime() {
         }
       }
     }
-
-
 
     Axios.post('/api/v1/app/crime/add', data)
       .then((res) => {
@@ -369,6 +372,15 @@ function AddCrime() {
               <Button onClick={handleClickOpen} variant="outlined" color="success" size="medium" style={{ backgroundColor: '#4CAF50', color: 'white', width: '200px', height: '50px', fontSize: '16px', justifyContent: 'center', alignSelf: 'center' }}>Add New</Button>
             </div>
             <br />
+            
+            <center><div className="suspect_profile">
+             <img height="auto" width="100px" id="suspect_img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZKTSTsxuO1oniA3yHQJsphf_01yYw6fs04Kwzzr2Sx50-8chw6wwuSNT4tns8RRb8eNY&usqp=CAU" />
+             <p id="suspect_name"> SUSPECT NAME</p>
+             <p id="suspect_id"> #123883</p>
+            </div>
+            </center>
+
+            <br />
             <Divider />
             {/* ✅ WITHNESS DETAILS */}
             <label id="labmain" style={{ color: 'black', textAlign: 'center', fontSize: '18px' }}> Witness Details : </label>
@@ -448,7 +460,7 @@ function AddCrime() {
           onChange={(searchVal) => requestSearch(searchVal)}
           onCancelSearch={() => cancelSearch()}
         /> */}
-        <SearchBar
+              <SearchBar
                 value={textFieldValue}
                 onChange={newValue => setTextFieldValue(newValue)}
                 onSearch={handleSearch}
