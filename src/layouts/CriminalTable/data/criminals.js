@@ -31,8 +31,9 @@ import team4 from "assets/images/team-4.jpg";
 import "../criminaltablesidebar.css";
 import $ from 'jquery'
 import { Divider } from "@mui/material";
+import CriminalData from "layouts/CrimeTable/data";
 
-export function useCriminalData() {
+function useCriminalData() {
 
   const [criminals, setCriminals] = useState([]);
   const [selectKey, setSelectedKey] = useState(null);
@@ -195,7 +196,7 @@ export function useCriminalData() {
       ),
     };
   });
-
+ 
   return {
     columns: [
       { Header: "Name", accessor: "name", width: "20%", align: "left" },
@@ -205,10 +206,12 @@ export function useCriminalData() {
       { Header: "Action", accessor: "action", align: "left" },
     ],
     rows: rows,
+    
   };
-
   return { columns, rows, textFieldValue, setTextFieldValue, handleSearch };
 
 };
+
+export default useCriminalData;
 
 

@@ -17,7 +17,7 @@ import AddCriminal from "layouts/AddCriminalForm/addCriminal";
 import Slide from "@mui/material/Slide";
 import "./criminaltablesidebar.css";
 import SearchBar from '@mkyy/mui-search-bar';
-import { useCriminalData } from "./data/criminals"; // Import the custom hook
+import useCriminalData from "./data/criminals"; // Import the custom hook
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
