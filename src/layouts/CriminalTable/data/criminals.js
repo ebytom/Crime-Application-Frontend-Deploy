@@ -85,7 +85,13 @@ export default function CriminalData() {
         <a className="closebtn" onClick={closeNav}>
           &times;
         </a>
-        <center><img id="avatar" src={selectKey?.criminalPhotoFileName} /></center>
+        <center>
+          <img id="avatar" src={
+            selectKey?.criminalPhotoFileName
+              ? selectKey.criminalPhotoFileName
+              : "https://www.svgrepo.com/download/295402/user-profile.svg"
+          } />
+        </center>
         <h3 id="fulld">{selectKey?.name} | #{selectKey?.criminalId}</h3>
         <Divider />
         <div className="detailsz">
