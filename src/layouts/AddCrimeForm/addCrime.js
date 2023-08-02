@@ -87,7 +87,11 @@ function AddCrime() {
   const rows = criminals.filter((criminal) => criminal.name.toLowerCase().includes(textFieldValue.toLowerCase())).map((criminal) => ({
     image: (
       <img
-        src={criminal.criminalPhotoFileName}
+        src={
+          criminal?.criminalPhotoFileName
+            ? criminal.criminalPhotoFileName
+            : "https://www.svgrepo.com/download/295402/user-profile.svg"
+        }
         alt="photo"
         width="50px" // Set the width of the image
         height="50px" // Set the height of the image
@@ -399,11 +403,18 @@ function AddCrime() {
                     height="auto"
                     width="100px"
                     id="suspect_img"
-                    src={selectedSuspect.criminalPhotoFileName}
+                    src={
+                      selectedSuspect?.criminalPhotoFileName
+                        ? selectedSuspect.criminalPhotoFileName
+                        : "https://www.svgrepo.com/download/295402/user-profile.svg"
+                    }
                     alt="Suspect"
                   />
-                  <p id="suspect_name">{selectedSuspect.name}</p><br/>
-                  <p id="suspect_id">#{selectedSuspect.criminalId}</p>
+                          <hr className="profile-line" />
+                          <div className="right-column">
+          <p id="suspect_name">{selectedSuspect.name}</p>
+          <p id="suspect_id">#{selectedSuspect.criminalId}</p>
+        </div>
                 </div>
               </center>
             )}

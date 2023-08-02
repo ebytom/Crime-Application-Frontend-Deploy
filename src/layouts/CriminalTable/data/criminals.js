@@ -41,6 +41,7 @@ export default function CriminalData() {
   const handleShowDetails = (key) => {
     document.getElementById("mySidenav").style.width = "400px";
     setSelectedKey(key);
+    openNav(); // Explicitly open the sidebar after setting the selected key
   };
 
   function openNav() {

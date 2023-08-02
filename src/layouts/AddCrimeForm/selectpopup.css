@@ -141,14 +141,30 @@
 
   /* SUSPECT PROFILE CARD */
 /* Common styles for the card */
+/* ... (existing CSS styles) */
+
+/* ... (existing CSS styles) */
+
+.profile-line {
+  border-left: 0.5px solid lightgrey; /* Change to border-left for a vertical line */
+  height: 60px; /* Adjust the height to your requirement */
+  margin: 0 20px; /* Add margin to separate the columns */
+}
+
+/* Common styles for the card */
 .suspect_profile {
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
   border-radius: 10px;
   width: 100%;
   max-width: 400px;
   margin: 10px auto;
-  padding: 20px;
   display: flex;
+  align-items: center;
+}
+
+.left-column {
+  display: flex;
+  flex-direction: column;
   align-items: center;
 }
 
@@ -156,11 +172,10 @@
   width: 90px;
   height: 90px;
   border-radius: 50%;
-  margin-right: 20px; /* Add margin to separate the image from text */
 }
 
-#suspect_info {
-  display:  block;
+.right-column {
+  display: flex;
   flex-direction: column;
   align-items: flex-start;
 }
@@ -168,7 +183,7 @@
 #suspect_name {
   font-size: 18px;
   font-weight: bold;
-  margin-bottom: 5px; /* Add margin between Name and Case ID */
+  margin-bottom: 5px;
 }
 
 #suspect_id {
@@ -177,31 +192,4 @@
 }
 
 /* Media queries for responsiveness */
-
-/* Small screens */
-@media screen and (max-width: 600px) {
-  .suspect_profile {
-    max-width: 300px;
-  }
-}
-
-/* Medium screens */
-@media screen and (min-width: 601px) and (max-width: 900px) {
-  .suspect_profile {
-    max-width: 400px;
-  }
-}
-
-/* Large screens */
-@media screen and (min-width: 901px) and (max-width: 1200px) {
-  .suspect_profile {
-    max-width: 500px;
-  }
-}
-
-/* Extra large screens */
-@media screen and (min-width: 1201px) {
-  .suspect_profile {
-    max-width: 600px;
-  }
-}
+/* ... (existing media queries) */

@@ -1,4 +1,6 @@
 /* eslint-disable prettier/prettier */
+// Dashboard.js
+
 import React, { useEffect, useState } from "react";
 import Grid from "@mui/material/Grid";
 import Skeleton from "@mui/material/Skeleton";
@@ -9,14 +11,15 @@ import ReportsBarChart from "examples/Charts/BarCharts/ReportsBarChart";
 import ReportsLineChart from "examples/Charts/LineCharts/ReportsLineChart";
 import OrdersOverview from "layouts/dashboard/components/OrdersOverview";
 import { Axios } from "Config/Axios/Axios";
-// Data
 import reportsBarChartData from "layouts/dashboard/data/reportsBarChartData";
 import reportsLineChartData from "layouts/dashboard/data/reportsLineChartData";
 import Projects from "layouts/dashboard/components/Projects";
 import { CircularProgress } from "@mui/material";
 
-function Dashboard() {
+// Custom CSS for Skeleton
+import "./Dashboard.css";
 
+function Dashboard() {
   const { sales, tasks } = reportsLineChartData;
 
   const [feeds, setFeeds] = useState(null);
@@ -51,7 +54,7 @@ function Dashboard() {
                   }}
                 />
               ) : (
-                <Skeleton variant="rectangular" height={100} />
+                <Skeleton variant="rectangular" height={100} animation="wave" className="custom-skeleton" />
               )}
             </MDBox>
           </Grid>
@@ -69,7 +72,7 @@ function Dashboard() {
                   }}
                 />
               ) : (
-                <Skeleton variant="rectangular" height={100} />
+                <Skeleton variant="rectangular" height={100} animation="wave" className="custom-skeleton" />
               )}
             </MDBox>
           </Grid>
@@ -88,7 +91,7 @@ function Dashboard() {
                   }}
                 />
               ) : (
-                <Skeleton variant="rectangular" height={100} />
+                <Skeleton variant="rectangular" height={100} animation="wave" className="custom-skeleton" />
               )}
             </MDBox>
           </Grid>
@@ -107,7 +110,7 @@ function Dashboard() {
                   }}
                 />
               ) : (
-                <Skeleton variant="rectangular" height={100} />
+                <Skeleton variant="rectangular" height={100} animation="wave" className="custom-skeleton" />
               )}
             </MDBox>
           </Grid>
@@ -126,7 +129,7 @@ function Dashboard() {
                   chart={reportsBarChartData}
                 />
               ) : (
-                <Skeleton variant="rectangular" height={200} />
+                <Skeleton variant="rectangular" height={200} animation="wave" className="custom-skeleton" />
               )}
             </MDBox>
           </Grid>
@@ -145,7 +148,7 @@ function Dashboard() {
                   chart={sales}
                 />
               ) : (
-                <Skeleton variant="rectangular" height={200} borderRadius={40}/>
+                <Skeleton variant="rectangular" height={200} animation="wave" className="custom-skeleton" />
               )}
             </MDBox>
           </Grid>
@@ -160,7 +163,7 @@ function Dashboard() {
                   chart={tasks}
                 />
               ) : (
-                <Skeleton variant="rectangular" height={200} borderRadius={40}/>
+                <Skeleton variant="rectangular" height={200} animation="wave" className="custom-skeleton" />
               )}
             </MDBox>
           </Grid>
@@ -172,7 +175,7 @@ function Dashboard() {
             {feeds ? (
               <OrdersOverview />
             ) : (
-              <Skeleton variant="rectangular" height={400}  borderRadius={40}/>
+              <Skeleton variant="rectangular" height={400} animation="wave" className="custom-skeleton" />
             )}
           </Grid>
         </Grid>
