@@ -3,10 +3,19 @@
 import React, { useState, useEffect } from "react";
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
+
+// Material Dashboard 2 React components
 import MDBox from "components/MDBox";
 import MDTypography from "components/MDTypography";
+
+// Material Dashboard 2 React example components
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
+import DashboardNavbar from "examples/Navbars/DashboardNavbar";
+
+import Footer from "examples/Footer";
+
 import DataTable from "examples/Tables/DataTable";
+import CriminalData from "./data/criminals";
 import { Button } from "@mui/material";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
@@ -15,31 +24,22 @@ import Dialog from "@mui/material/Dialog";
 import CloseIcon from "@mui/icons-material/Close";
 import AddCriminal from "layouts/AddCriminalForm/addCriminal";
 import Slide from "@mui/material/Slide";
-import "./criminaltablesidebar.css";
+import './criminaltablesidebar.css'
 import SearchBar from '@mkyy/mui-search-bar';
-import { useCriminalData } from "./data/criminals"; // Import the custom hook
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
+
+
 function CriminalsTable() {
-  // State for the criminal data
-  const { columns, rows } = useCriminalData();
-
-  const [open, setOpen] = React.useState(false);
-
+  const { columns, rows } = CriminalData();
+  //SEARCH BAR STATES
   const [textFieldValue, setTextFieldValue] = useState("");
+  const [filteredRows, setFilteredRows]  =useState("");
 
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
+  //SEARCH BAR FUNCTION
   const handleSearch = () => {
     if (textFieldValue.trim() === "") {
       setFilteredRows(rows);
@@ -53,6 +53,24 @@ function CriminalsTable() {
       setFilteredRows(filteredData);
     }
   };
+
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  //SIDENAV FUNCTION
+  function openNav() {
+    document.getElementById("mySidenav").style.width = "400px";
+  }
+  function closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
+  }
 
   return (
     <DashboardLayout>
@@ -82,8 +100,8 @@ function CriminalsTable() {
                   </Button>
                 </div>
 
-                <div style={{ paddingRight:'20px', float: "right", marginTop: "-30px" }}>
-                  <SearchBar 
+                <div style={{ paddingRight: '20px', float: "right", marginTop: "-30px" }}>
+                  <SearchBar
                     value={textFieldValue}
                     onChange={newValue => setTextFieldValue(newValue)}
                     onSearch={handleSearch}

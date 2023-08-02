@@ -32,10 +32,11 @@ import "../criminaltablesidebar.css";
 import $ from 'jquery'
 import { Divider } from "@mui/material";
 
-export default function CriminalData() {
+export function useCriminalData() {
 
   const [criminals, setCriminals] = useState([]);
   const [selectKey, setSelectedKey] = useState(null);
+  const [textFieldValue, setTextFieldValue] = useState("");
 
 
   const handleShowDetails = (key) => {
@@ -205,4 +206,9 @@ export default function CriminalData() {
     ],
     rows: rows,
   };
-}
+
+  return { columns, rows, textFieldValue, setTextFieldValue, handleSearch };
+
+};
+
+
