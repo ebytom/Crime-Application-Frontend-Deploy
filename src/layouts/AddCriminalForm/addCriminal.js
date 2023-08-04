@@ -21,7 +21,7 @@ import Stack from '@mui/material/Stack';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
 import { Axios } from "Config/Axios/Axios";
-import './addphoto.css'
+import "../AddCrimeForm/selectpopup.css"
 
 function AddCriminal() {
     function testFun() {
@@ -31,7 +31,7 @@ function AddCriminal() {
     //✅ BACKEND
     const [criminalData, setCriminalData] = useState({
         name: "",
-        gender:"",
+        gender: "",
         dob: null,
         address: "",
         physicalCharacteristics: {
@@ -161,13 +161,25 @@ function AddCriminal() {
                             }))}
                         />
                         <br />
-                        <MDInput label="Gender" size="large" style={{ width: '600px', height: '50px', justifyContent: 'center', alignSelf: 'center' }}
+                        {/* <MDInput label="Gender" size="large" style={{ width: '600px', height: '50px', justifyContent: 'center', alignSelf: 'center' }}
                             onChange={e => setCriminalData(pre => ({
                                 ...pre,
                                 gender: e.target.value,
                             }))}
                         />
-                        <br/>
+                        <br/> */}
+                        <InputLabel style={{ width: '600px', height: '20px', justifyContent: 'center', alignSelf: 'center' }}>Gender</InputLabel>
+                        <Select placeholder="Gender" style={{ width: '600px', height: '50px', justifyContent: 'center', alignSelf: 'center', color: "black" }}
+                            onChange={e => setCriminalData(pre => ({
+                                ...pre,
+                                name: e.target.value,
+                            }))}>
+                            <MenuItem style={{ color: 'black' }} value="male">Male</MenuItem>
+                            <hr style={{ height: '10px', color: 'transparent', border: 'none', outline: 'none' }} />
+                            <MenuItem style={{ color: 'black' }} value="female">Female</MenuItem>
+
+                        </Select>
+                        <br />
 
                         <MDInput type="date" size="large" style={{ width: '600px', height: '50px', justifyContent: 'center', alignSelf: 'center' }}
                             onChange={e => setCriminalData(pre => ({
@@ -216,13 +228,13 @@ function AddCriminal() {
                                 crimeDetails: e.target.value,
                             }))}
                         />
-                        <br />
+                        {/* <br />
                         <MDInput type="date" size="large" style={{ width: '600px', height: '50px', justifyContent: 'center', alignSelf: 'center' }}
                             onChange={e => setCriminalData(pre => ({
                                 ...pre,
                                 arrestedOn: e.target.value,
                             }))}
-                        />
+                        /> */}
                         <br />
                         <Divider />
                         {/* ✅ COURT INFORMATIOJ */}
@@ -248,12 +260,12 @@ function AddCriminal() {
                         <label id="labmain" style={{ color: 'black', textAlign: 'center', fontSize: '18px' }}>Upload Photos : </label>
                         <hr style={{ height: '10px', color: 'transparent', border: 'none', outline: 'none' }} />
                         <div style={{ display: 'inline-flex', justifyContent: 'center' }}>
-                            
+
                             {
                                 fileErr != "" &&
-                                <b style={{color:'red'}}>{fileErr}</b>
+                                <b style={{ color: 'red' }}>{fileErr}</b>
                             }
-                            <input id="photo" name="photo" type="file" accept="image/"  onChange={handleFileUpload}/>
+                            <input id="photo" name="photo" type="file" accept="image/" onChange={handleFileUpload} />
                             {/* <Button variant="outlined" color="info" size="small" style={{ backgroundColor: '#4CAF50', color: 'white', width: '300px', height: '40px', fontSize: '14px', justifyContent: 'center', alignSelf: 'center' }}>Upload</Button> */}
                         </div>
                         <br />

@@ -39,6 +39,7 @@ function useCriminalData() {
   const [selectKey, setSelectedKey] = useState(null);
   const [textFieldValue, setTextFieldValue] = useState("");
 
+  const [filteredRows, setFilteredRows] = useState([]);
 
   const handleShowDetails = (key) => {
     document.getElementById("mySidenav").style.width = "400px";
@@ -68,6 +69,8 @@ function useCriminalData() {
   // <div id="main">
 
   // </div>
+
+  
 
   const Name = ({ image, name, id }) => (
     <MDBox display="flex" alignItems="center" lineHeight={1}>
@@ -103,7 +106,8 @@ function useCriminalData() {
           <br />
           <p id="info">Age : {new Date().getFullYear() - new Date(selectKey?.dob)?.getFullYear()}</p>
           <br />
-          <p id="info">DOB : {selectKey?.dob.split("T")[0]}</p>
+          <p id="info">DOB: {selectKey?.dob?.split("T")[0]}</p>
+          {/* <p id="info">DOB : {selectKey?.dob.split("T")[0]}</p> */}
           <br />
           <p id="info">Address : {selectKey?.address}</p>
           <br />
@@ -195,6 +199,7 @@ function useCriminalData() {
         </MDTypography>
       ),
     };
+    
   });
  
   return {
@@ -205,10 +210,10 @@ function useCriminalData() {
       { Header: "Status", accessor: "status", align: "left" },
       { Header: "Action", accessor: "action", align: "left" },
     ],
-    rows: rows,
+    rows: filteredRows.length > 0 ? filteredRows : rows, // Use filteredRows if available
     
   };
-  return { columns, rows, textFieldValue, setTextFieldValue, handleSearch };
+ 
 
 };
 
