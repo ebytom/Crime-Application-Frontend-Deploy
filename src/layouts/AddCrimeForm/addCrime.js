@@ -47,9 +47,8 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 function AddCrime() {
 
-
   //✅ REQUIRED FIELD ERROR MESSAGE
-   const [errorMessage, setErrorMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
 
   //✅ SUSPECT IMAGE SET
@@ -116,6 +115,8 @@ function AddCrime() {
 
 
   const [open, setOpen] = React.useState(false);
+
+  
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -204,62 +205,62 @@ function AddCrime() {
       !crimeData.status ||
       !crimeData.date ||
       !crimeData.incidentDetails
-  ) {
+    ) {
       setErrorMessage("Please fill out all the required fields.");
       setLoader(false)
       return;
-  }
-  
-  else{
-
-    data = {
-      ...data,
-      stringDate: crimeData.date?.split("T")[0].split("-").reverse().join("-"),
-      caseId: new Date().getTime(),
-      dateMetaData: {
-        day: day,
-        month: month,
-        year: year,
-        dayOfWeek: dayOfWeek,
-        week: ""
-      }
     }
 
+    else {
 
-
-    if (policeReportFile != null) {
-      filename = await uploadFile(policeReportFile, "policeReport")
       data = {
         ...data,
-        policeReport: {
-          details: crimeData.policeReport.details,
-          filename: filename
+        stringDate: crimeData.date?.split("T")[0].split("-").reverse().join("-"),
+        caseId: new Date().getTime(),
+        dateMetaData: {
+          day: day,
+          month: month,
+          year: year,
+          dayOfWeek: dayOfWeek,
+          week: ""
         }
       }
-    }
 
-    if (mediaReportFile != null) {
-      filename = await uploadFile(mediaReportFile, "mediaReport")
-      data = {
-        ...data,
-        mediaReport: {
-          details: crimeData.mediaReport.details,
-          filename: filename
+
+
+      if (policeReportFile != null) {
+        filename = await uploadFile(policeReportFile, "policeReport")
+        data = {
+          ...data,
+          policeReport: {
+            details: crimeData.policeReport.details,
+            filename: filename
+          }
         }
       }
-    }
 
-    Axios.post('/api/v1/app/crime/add', data)
-      .then((res) => {
-        console.log(res);
-        setLoader(false)
-        window.location.reload();
+      if (mediaReportFile != null) {
+        filename = await uploadFile(mediaReportFile, "mediaReport")
+        data = {
+          ...data,
+          mediaReport: {
+            details: crimeData.mediaReport.details,
+            filename: filename
+          }
+        }
+      }
 
-      })
-      .catch(err => {
-        console.log(err);
-        setLoader(false)
-      })
+      Axios.post('/api/v1/app/crime/add', data)
+        .then((res) => {
+          console.log(res);
+          setLoader(false)
+          window.location.reload();
+
+        })
+        .catch(err => {
+          console.log(err);
+          setLoader(false)
+        })
 
     }
   }
@@ -339,7 +340,7 @@ function AddCrime() {
             />
             <br />
             <InputLabel style={{ width: '600px', height: '20px', justifyContent: 'center', alignSelf: 'center' }}>Date (Required)</InputLabel>
-            <MDInput  type="date" size="large" style={{ width: '600px', height: '50px', justifyContent: 'center', alignSelf: 'center' }}
+            <MDInput type="date" size="large" style={{ width: '600px', height: '50px', justifyContent: 'center', alignSelf: 'center' }}
               onChange={e => setCrimeData(pre => ({
                 ...pre,
                 date: e.target.value,
@@ -509,6 +510,10 @@ function AddCrime() {
                   filename: crimeData.policeReport.filename
                 }
               }))} />
+              <Button
+              className="w-full bg-green-500 hover:bg-sky-700 text-white py-2 rounded-lg font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transform hover:scale-105 transition-all duration-300">
+              <MDInput style={{ width: '600px', justifyContent: 'center', alignSelf: 'center',backgroundColor:'black',color:'white'}} type="file" onChange={e => setPoliceReportFile(e.target.files[0])}/>
+            </Button>
             <br />
 
             {/* ✅ MEDIA REPORT */}
@@ -523,19 +528,23 @@ function AddCrime() {
                   filename: crimeData.mediaReport.filename
                 }
               }))} />
+            <Button
+              className="w-full bg-green-500 hover:bg-sky-700 text-white py-2 rounded-lg font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transform hover:scale-105 transition-all duration-300">
+              <MDInput style={{ width: '600px', justifyContent: 'center', alignSelf: 'center',backgroundColor:'black',color:'white'}} type="file" onChange={e => setMediaReportFile(e.target.files[0])}/>
+            </Button>
             <br />
             {/* ✅ SUBMIT BUTTON - END */}
             <Button onClick={submitFunction} variant="contained" size="medium" style={{ color: 'white', width: '600px', height: '50px', fontSize: '16px', justifyContent: 'center', alignSelf: 'center' }} >
               {loader ? <CircularProgress color="white" size={24} /> : "Submit"}
             </Button>
             <Snackbar anchorOrigin={{
-                            vertical: 'top',
-                            horizontal: 'center',
-                        }} open={!!errorMessage} autoHideDuration={6000} onClose={() => setErrorMessage("")}>
-                            <MuiAlert onClose={() => setErrorMessage("")} severity="error" elevation={6} variant="filled">
-                                {errorMessage}
-                            </MuiAlert>
-                        </Snackbar>
+              vertical: 'top',
+              horizontal: 'center',
+            }} open={!!errorMessage} autoHideDuration={6000} onClose={() => setErrorMessage("")}>
+              <MuiAlert onClose={() => setErrorMessage("")} severity="error" elevation={6} variant="filled">
+                {errorMessage}
+              </MuiAlert>
+            </Snackbar>
             <br />
           </Card>
         </MDBox>
