@@ -147,6 +147,12 @@ function AddCrime() {
     mediaReport: {
       details: "",
       filename: ""
+    },
+    dayMetaData: {
+      day: "",
+      year: "",
+      dayOfWeek: "",
+      week: ""
     }
   })
 
@@ -164,7 +170,7 @@ function AddCrime() {
   }
 
   console.log(crimeData);
-  
+
   const [loader, setLoader] = useState(false)
 
   const [policeReportFile, setPoliceReportFile] = useState(null)
@@ -175,18 +181,35 @@ function AddCrime() {
     var filename = ""
     var data = crimeData
 
-    // data = {
-    //   ...data,
-    //   stringDate: crimeData.date?.split("T")[0].split("-").reverse().join("-")
-    // }
+    const months = [
+      "January", "February", "March", "April",
+      "May", "June", "July", "August", "September",
+      "October", "November", "December"
+    ];
+
+    const currentDate = new Date(crimeData.date);
+
+    // Get the day, month, year, and day of the week
+    const day = currentDate.getDate();
+    const month = currentDate.getMonth();
+    const year = currentDate.getFullYear();
+    const dayOfWeek = currentDate.getDay();
+
 
     data = {
       ...data,
       stringDate: crimeData.date?.split("T")[0].split("-").reverse().join("-"),
-      caseId: new Date().getTime()
+      caseId: new Date().getTime(),
+      dateMetaData: {
+        day: day,
+        month: month,
+        year: year,
+        dayOfWeek: dayOfWeek,
+        week: ""
+      }
     }
 
-    
+
 
     if (policeReportFile != null) {
       filename = await uploadFile(policeReportFile, "policeReport")
@@ -410,11 +433,11 @@ function AddCrime() {
                     }
                     alt="Suspect"
                   />
-                          <hr className="profile-line" />
-                          <div className="right-column">
-          <p id="suspect_name">{selectedSuspect.name}</p>
-          <p id="suspect_id">#{selectedSuspect.criminalId}</p>
-        </div>
+                  <hr className="profile-line" />
+                  <div className="right-column">
+                    <p id="suspect_name">{selectedSuspect.name}</p>
+                    <p id="suspect_id">#{selectedSuspect.criminalId}</p>
+                  </div>
                 </div>
               </center>
             )}

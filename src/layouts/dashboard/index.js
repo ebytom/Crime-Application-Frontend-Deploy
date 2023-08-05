@@ -24,6 +24,12 @@ function Dashboard() {
 
   const [feeds, setFeeds] = useState(null);
 
+  const [graph, setGraph] = useState({
+    graph1: {},
+    graph2: {},
+    graph3: {}
+  })
+
   useEffect(() => {
     Axios.get("/api/v1/app/dashboard/getFeeds")
       .then((res) => {
@@ -32,6 +38,20 @@ function Dashboard() {
       })
       .catch((err) => {
         console.log(err);
+      });
+
+
+    Axios.get("/api/v1/app/dashboard/getCharts")
+      .then((response) => {
+        setGraph({
+          graph1: response?.data?.graph1,
+          graph2: response?.data?.graph2,
+          graph3: response?.data?.graph3
+        })
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
       });
   }, []);
 
@@ -124,9 +144,13 @@ function Dashboard() {
                 <ReportsBarChart
                   color="info"
                   title="Crimes"
-                  description="This month"
-                  date="campaign sent 2 days ago"
-                  chart={reportsBarChartData}
+                  description="This year"
+                  date="just updated"
+                  chart={{
+                    labels: graph?.graph1?.key,
+                    datasets: { label: "Crimes", data: graph?.graph1?.data },
+                  }}
+                // chart={reportsBarChartData}
                 />
               ) : (
                 <Skeleton variant="rectangular" height={200} animation="wave" className="custom-skeleton" />
@@ -138,14 +162,17 @@ function Dashboard() {
               {feeds ? (
                 <ReportsLineChart
                   color="success"
-                  title="daily stats"
+                  title="Crimes"
                   description={
                     <>
-                      (<strong>+15%</strong>) increase in today cases.
+                      Last 5 months
                     </>
                   }
-                  date="updated 4 min ago"
-                  chart={sales}
+                  date="just updated"
+                  chart={{
+                    labels: graph?.graph2?.key,
+                    datasets: { label: "Crimes", data: graph?.graph2?.data },
+                  }}
                 />
               ) : (
                 <Skeleton variant="rectangular" height={200} animation="wave" className="custom-skeleton" />
@@ -157,10 +184,13 @@ function Dashboard() {
               {feeds ? (
                 <ReportsLineChart
                   color="dark"
-                  title="Open cases"
-                  description="This month"
+                  title="Inprogress Cases"
+                  description="Last 5 months"
                   date="just updated"
-                  chart={tasks}
+                  chart={{
+                    labels: graph?.graph3?.key,
+                    datasets: { label: "Crimes", data: graph?.graph3?.data },
+                  }}
                 />
               ) : (
                 <Skeleton variant="rectangular" height={200} animation="wave" className="custom-skeleton" />
@@ -169,7 +199,7 @@ function Dashboard() {
           </Grid>
         </Grid>
       </MDBox>
-      <MDBox>
+      {/* <MDBox>
         <Grid container spacing={3}>
           <Grid item xs={12} md={6} lg={4}>
             {feeds ? (
@@ -179,7 +209,7 @@ function Dashboard() {
             )}
           </Grid>
         </Grid>
-      </MDBox>
+      </MDBox> */}
     </DashboardLayout>
   );
 }
