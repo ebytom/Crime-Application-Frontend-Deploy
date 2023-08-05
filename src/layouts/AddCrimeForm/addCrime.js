@@ -47,6 +47,11 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 function AddCrime() {
 
+
+  //✅ REQUIRED FIELD ERROR MESSAGE
+   const [errorMessage, setErrorMessage] = useState("");
+
+
   //✅ SUSPECT IMAGE SET
   const [suspectImg, setSuspectImg] = useState("");
 
@@ -195,6 +200,17 @@ function AddCrime() {
     const year = currentDate.getFullYear();
     const dayOfWeek = currentDate.getDay();
 
+    if (
+      !crimeData.status ||
+      !crimeData.date ||
+      !crimeData.incidentDetails
+  ) {
+      setErrorMessage("Please fill out all the required fields.");
+      setLoader(false)
+      return;
+  }
+  
+  else{
 
     data = {
       ...data,
@@ -244,6 +260,8 @@ function AddCrime() {
         console.log(err);
         setLoader(false)
       })
+
+    }
   }
 
 
@@ -313,14 +331,15 @@ function AddCrime() {
               }))}
             />
             <br /> */}
-            <MDInput label="Incident Details" style={{ width: '600px', justifyContent: 'center', alignSelf: 'center' }} multiline rows={5}
+            <MDInput label="Incident Details (Required)" style={{ width: '600px', justifyContent: 'center', alignSelf: 'center' }} multiline rows={5}
               onChange={e => setCrimeData(pre => ({
                 ...pre,
                 incidentDetails: e.target.value,
               }))}
             />
             <br />
-            <MDInput type="date" size="large" style={{ width: '600px', height: '50px', justifyContent: 'center', alignSelf: 'center' }}
+            <InputLabel style={{ width: '600px', height: '20px', justifyContent: 'center', alignSelf: 'center' }}>Date (Required)</InputLabel>
+            <MDInput  type="date" size="large" style={{ width: '600px', height: '50px', justifyContent: 'center', alignSelf: 'center' }}
               onChange={e => setCrimeData(pre => ({
                 ...pre,
                 date: e.target.value,
@@ -354,7 +373,7 @@ function AddCrime() {
                     <MDButton  variant="outlined" color="success"><DoneIcon/><Icon></Icon>&nbsp;CLOSED</MDButton>&nbsp;
                   </div> */}
             {/* ✅ STATUS */}
-            <InputLabel style={{ width: '600px', height: '20px', justifyContent: 'center', alignSelf: 'center' }}>Case Status</InputLabel>
+            <InputLabel style={{ width: '600px', height: '20px', justifyContent: 'center', alignSelf: 'center' }}>Case Status (Required)</InputLabel>
             <Select placeholder="Select current status" style={{ width: '600px', height: '50px', justifyContent: 'center', alignSelf: 'center' }}
               onChange={e => setCrimeData(pre => ({
                 ...pre,
@@ -506,7 +525,17 @@ function AddCrime() {
               }))} />
             <br />
             {/* ✅ SUBMIT BUTTON - END */}
-            <Button onClick={submitFunction} variant="contained" size="medium" style={{ color: 'white', width: '600px', height: '50px', fontSize: '16px', justifyContent: 'center', alignSelf: 'center' }} >Sumbit</Button>
+            <Button onClick={submitFunction} variant="contained" size="medium" style={{ color: 'white', width: '600px', height: '50px', fontSize: '16px', justifyContent: 'center', alignSelf: 'center' }} >
+              {loader ? <CircularProgress color="white" size={24} /> : "Submit"}
+            </Button>
+            <Snackbar anchorOrigin={{
+                            vertical: 'top',
+                            horizontal: 'center',
+                        }} open={!!errorMessage} autoHideDuration={6000} onClose={() => setErrorMessage("")}>
+                            <MuiAlert onClose={() => setErrorMessage("")} severity="error" elevation={6} variant="filled">
+                                {errorMessage}
+                            </MuiAlert>
+                        </Snackbar>
             <br />
           </Card>
         </MDBox>

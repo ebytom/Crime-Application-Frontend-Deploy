@@ -28,6 +28,10 @@ function AddCriminal() {
         console.log("Hello");
     }
 
+
+    //REQUIRED FIELD ERROR MESSAGE
+    const [errorMessage, setErrorMessage] = useState("");
+
     //✅ BACKEND
     const [criminalData, setCriminalData] = useState({
         name: "",
@@ -52,28 +56,39 @@ function AddCriminal() {
     // const Success = () => toast.success('Successfully Posted');
 
     const submitFunction = async () => {
-        setLoader(true)
-        var filename = ""
-        var data = criminalData
-        if (criminalPhoto != null) {
-            // filename = await convertImg()
-            data = {
-                ...data,
-                criminalPhotoFileName: criminalPhoto
+            setLoader(true)
+            var filename = ""
+            var data = criminalData
+            if (criminalPhoto != null) {
+                // filename = await convertImg()
+                data = {
+                    ...data,
+                    criminalPhotoFileName: criminalPhoto
+                }
+                console.log(data);
             }
-            console.log(data);
-        }
 
-        Axios.post('/api/v1/app/criminal/add', data)
-            .then((res) => {
-                console.log(res);
-                setLoader(false)
-                window.location.reload();
-            })
-            .catch(err => {
-                console.log(err);
-                setLoader(false)
-            })
+            if (
+                !criminalData.name ||
+                !criminalData.gender ||
+                !criminalData.crimeDetails
+            ) {
+                setErrorMessage("Please fill out all the required fields.");
+                return;
+            }
+            else{
+
+            Axios.post('/api/v1/app/criminal/add', data)
+                .then((res) => {
+                    console.log(res);
+                    setLoader(false)
+                    window.location.reload();
+                })
+                .catch(err => {
+                    console.log(err);
+                    setLoader(false)
+                })
+            }
     }
 
     const uploadPhoto = async () => {
@@ -154,7 +169,7 @@ function AddCriminal() {
                         {/* ✅ CRIMINAL DETAILS */}
                         <label id="labmain" style={{ color: 'black', textAlign: 'center', fontSize: '18px' }}>Criminal Details :</label>
 
-                        <MDInput label="Name" size="large" style={{ width: '600px', height: '50px', justifyContent: 'center', alignSelf: 'center' }}
+                        <MDInput required label="Name (Required)" size="large" style={{ width: '600px', height: '50px', justifyContent: 'center', alignSelf: 'center' }}
                             onChange={e => setCriminalData(pre => ({
                                 ...pre,
                                 name: e.target.value,
@@ -168,11 +183,11 @@ function AddCriminal() {
                             }))}
                         />
                         <br/> */}
-                        <InputLabel style={{ width: '600px', height: '20px', justifyContent: 'center', alignSelf: 'center' }}>Gender</InputLabel>
-                        <Select placeholder="Gender" style={{ width: '600px', height: '50px', justifyContent: 'center', alignSelf: 'center', color: "black" }}
+                        <InputLabel style={{ width: '600px', height: '20px', justifyContent: 'center', alignSelf: 'center' }}>Gender (Required)</InputLabel>
+                        <Select required placeholder="Gender" style={{ width: '600px', height: '50px', justifyContent: 'center', alignSelf: 'center', color: "black" }}
                             onChange={e => setCriminalData(pre => ({
                                 ...pre,
-                                name: e.target.value,
+                                gender: e.target.value,
                             }))}>
                             <MenuItem style={{ color: 'black' }} value="male">Male</MenuItem>
                             <hr style={{ height: '10px', color: 'transparent', border: 'none', outline: 'none' }} />
@@ -222,7 +237,7 @@ function AddCriminal() {
 
                         <Divider />
 
-                        <MDInput label="Crime Details" style={{ width: '600px', justifyContent: 'center', alignSelf: 'center' }} multiline rows={5}
+                        <MDInput required label="Crime Details (Required)" style={{ width: '600px', justifyContent: 'center', alignSelf: 'center' }} multiline rows={5}
                             onChange={e => setCriminalData(pre => ({
                                 ...pre,
                                 crimeDetails: e.target.value,
@@ -269,8 +284,21 @@ function AddCriminal() {
                             {/* <Button variant="outlined" color="info" size="small" style={{ backgroundColor: '#4CAF50', color: 'white', width: '300px', height: '40px', fontSize: '14px', justifyContent: 'center', alignSelf: 'center' }}>Upload</Button> */}
                         </div>
                         <br />
+                        {/* ✅ SUBMIT BUTTON - END
+                        <Button onClick={submitFunction} variant="contained" size="medium" style={{ color: 'white', width: '600px', height: '50px', fontSize: '16px', justifyContent: 'center', alignSelf: 'center' }} >Sumbit</Button> */}
+
                         {/* ✅ SUBMIT BUTTON - END */}
-                        <Button onClick={submitFunction} variant="contained" size="medium" style={{ color: 'white', width: '600px', height: '50px', fontSize: '16px', justifyContent: 'center', alignSelf: 'center' }} >Sumbit</Button>
+                        <Button onClick={submitFunction} variant="contained" size="medium" style={{ color: 'white', width: '600px', height: '50px', fontSize: '16px', justifyContent: 'center', alignSelf: 'center' }} >Submit</Button>
+                        <br />
+                        {/* Error Snackbar */}
+                        <Snackbar anchorOrigin={{
+                            vertical: 'top',
+                            horizontal: 'center',
+                        }} open={!!errorMessage} autoHideDuration={6000} onClose={() => setErrorMessage("")}>
+                            <MuiAlert onClose={() => setErrorMessage("")} severity="error" elevation={6} variant="filled">
+                                {errorMessage}
+                            </MuiAlert>
+                        </Snackbar>
                         <br />
                     </Card>
                 </MDBox>
