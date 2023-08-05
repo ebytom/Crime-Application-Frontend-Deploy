@@ -195,6 +195,8 @@ function AddCriminal() {
                             <MenuItem style={{ color: 'black' }} value="male">Male</MenuItem>
                             <hr style={{ height: '10px', color: 'transparent', border: 'none', outline: 'none' }} />
                             <MenuItem style={{ color: 'black' }} value="female">Female</MenuItem>
+                            <hr style={{ height: '10px', color: 'transparent', border: 'none', outline: 'none' }} />
+                            <MenuItem style={{ color: 'black' }} value="female">Other</MenuItem>
 
                         </Select>
                         <br />
