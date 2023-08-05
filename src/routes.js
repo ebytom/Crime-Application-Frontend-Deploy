@@ -78,7 +78,7 @@ const routes = [
     type: "collapse",
     name: "Criminals",
     key: "criminals",
-    icon: <Icon fontSize="small">clear_all</Icon>,
+    icon: <Icon fontSize="small">person</Icon>,
     route: "/criminals",
     component: <CriminalsTable />,
   },

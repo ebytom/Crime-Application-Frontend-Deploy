@@ -26,6 +26,7 @@ import AddCriminal from "layouts/AddCriminalForm/addCriminal";
 import Slide from "@mui/material/Slide";
 import './criminaltablesidebar.css'
 import SearchBar from '@mkyy/mui-search-bar';
+import CircularProgress from "@mui/material/CircularProgress";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -34,7 +35,8 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 
 function CriminalsTable() {
-  const { columns, rows } = CriminalData();
+  const { loading,columns, rows } = CriminalData();
+
   //SEARCH BAR STATES
   const [textFieldValue, setTextFieldValue] = useState("");
   const [filteredRows, setFilteredRows]  =useState("");
@@ -111,13 +113,19 @@ function CriminalsTable() {
                 </div>
               </MDBox>
               <MDBox pt={3}>
+              {loading ? (
+                  <div style={{ display: "flex", justifyContent: "center", padding: "20px" }}>
+                    <CircularProgress color="secondary" />
+                  </div>
+                ) : (
                 <DataTable
                   table={{ columns, rows }}
                   isSorted={false}
                   entriesPerPage={false}
                   showTotalEntries={false}
                   noEndBorder
-                />
+                />)}
+
               </MDBox>
             </Card>
           </Grid>

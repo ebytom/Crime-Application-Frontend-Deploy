@@ -32,12 +32,16 @@ import "../criminaltablesidebar.css";
 import $ from 'jquery'
 import { Divider } from "@mui/material";
 import CriminalData from "layouts/CrimeTable/data";
+import CircularProgress from "@mui/material/CircularProgress";
+
 
 function useCriminalData() {
 
   const [criminals, setCriminals] = useState([]);
   const [selectKey, setSelectedKey] = useState(null);
   const [textFieldValue, setTextFieldValue] = useState("");
+
+  const [loading, setLoading] = useState(false);
 
   const [filteredRows, setFilteredRows] = useState([]);
 
@@ -149,18 +153,22 @@ function useCriminalData() {
   );
 
   useEffect(() => {
+    setLoading(true);
     Axios.get("/api/v1/app/criminal/getAll")
       .then((res) => {
+        setLoading(false);
         setCriminals(res.data.criminals);
         console.log(res);
       })
       .catch((err) => {
+        setLoading(false);
         console.log(err);
       });
   }, []);
 
   const rows = criminals.map((criminal) => {
     return {
+      
       name: (
         <Name
           image={
@@ -203,6 +211,7 @@ function useCriminalData() {
   });
  
   return {
+    loading,
     columns: [
       { Header: "Name", accessor: "name", width: "20%", align: "left" },
       { Header: " Gender", accessor: "gender", align: "left" },
@@ -211,10 +220,7 @@ function useCriminalData() {
       { Header: "Action", accessor: "action", align: "left" },
     ],
     rows: filteredRows.length > 0 ? filteredRows : rows, // Use filteredRows if available
-    
   };
- 
-
 };
 
 export default useCriminalData;
