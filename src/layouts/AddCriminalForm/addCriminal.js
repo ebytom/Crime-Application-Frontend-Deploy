@@ -21,7 +21,9 @@ import Stack from '@mui/material/Stack';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
 import { Axios } from "Config/Axios/Axios";
-import "../AddCrimeForm/selectpopup.css"
+import "../AddCrimeForm/selectpopup.css";
+import CircularProgress from "@mui/material/CircularProgress";
+
 
 function AddCriminal() {
     function testFun() {
@@ -74,6 +76,7 @@ function AddCriminal() {
                 !criminalData.crimeDetails
             ) {
                 setErrorMessage("Please fill out all the required fields.");
+                setLoader(false);
                 return;
             }
             else{
@@ -288,7 +291,7 @@ function AddCriminal() {
                         <Button onClick={submitFunction} variant="contained" size="medium" style={{ color: 'white', width: '600px', height: '50px', fontSize: '16px', justifyContent: 'center', alignSelf: 'center' }} >Sumbit</Button> */}
 
                         {/* ✅ SUBMIT BUTTON - END */}
-                        <Button onClick={submitFunction} variant="contained" size="medium" style={{ color: 'white', width: '600px', height: '50px', fontSize: '16px', justifyContent: 'center', alignSelf: 'center' }} >Submit</Button>
+                        <Button onClick={submitFunction} variant="contained" size="medium" style={{ color: 'white', width: '600px', height: '50px', fontSize: '16px', justifyContent: 'center', alignSelf: 'center' }} >  {loader ? <CircularProgress color="white" size={24} /> : "Submit"}</Button>
                         <br />
                         {/* Error Snackbar */}
                         <Snackbar anchorOrigin={{
