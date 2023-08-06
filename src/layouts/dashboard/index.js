@@ -144,7 +144,7 @@ function Dashboard() {
                 <ReportsBarChart
                   color="info"
                   title="Crimes"
-                  description="This year"
+                  description="Last 5 years"
                   date="just updated"
                   chart={{
                     labels: graph?.graph1?.key,
