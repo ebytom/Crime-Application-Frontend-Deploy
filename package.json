@@ -1,5 +1,5 @@
 {
-  "name": "Crime Management System",
+  "name": "cms",
   "version": "2.2.0",
   "private": true,
   "dependencies": {
